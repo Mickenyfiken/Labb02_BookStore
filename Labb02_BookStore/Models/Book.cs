@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Channels;
 
 namespace Labb02_BookStore;
 
 public partial class Book
 {
     public string Isbn13 { get; set; } = null!;
-
+    
     public string Title { get; set; } = null!;
 
     public string? Language { get; set; }
@@ -26,4 +27,11 @@ public partial class Book
     public virtual ICollection<Author> Authors { get; set; } = new List<Author>();
 
     public virtual ICollection<Category> Categories { get; set; } = new List<Category>();
+}
+
+
+
+public class testCommit
+{
+
 }
