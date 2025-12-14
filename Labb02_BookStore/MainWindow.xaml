@@ -6,23 +6,28 @@
         xmlns:local="clr-namespace:Labb02_BookStore"
         xmlns:views="clr-namespace:Labb02_BookStore.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        Loaded="MainWindow_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
-
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-        <!--<views:MenuView Grid.Row="0"/>-->
-        <views:InventoryView Grid.Row="1"/>
-        <views:StoreView Grid.Row="2"/>
-        
-
+        <views:StoreView Grid.Row="1" Grid.Column="0"/>
+        <views:InventoryView Grid.Row="1" Grid.Column="1"/>
+        <views:MenuView Grid.Row="0" Grid.ColumnSpan="2"/>
     </Grid>
+<!--https://app.uizard.io/templates/K74V5VKljaFxdgKAxYE7/preview-->
+
+        <!--<TreeView x:Name="myTreeView">
+            <TreeView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Firstname}" />
+                </DataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>-->
 </Window>

@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Collections.ObjectModel;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -20,7 +21,27 @@ namespace Labb02_BookStore
         public MainWindow()
         {
             InitializeComponent();
-
+            DataContext = this;
         }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            //LoadAuthors();
+        }
+
+        //private void LoadAuthors()
+        //{
+        //    using var db = new BookStoreDbContext();
+
+        //    var authors = db.Authors
+        //         .Where(authors => authors.Firstname != null)
+        //         .ToList();
+
+
+        //    myTreeView.ItemsSource = new ObservableCollection<Author>(authors);
+
+        //}
+
+
     }
 }

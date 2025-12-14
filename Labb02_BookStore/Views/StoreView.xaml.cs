@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,24 @@ namespace Labb02_BookStore.Views
         public StoreView()
         {
             InitializeComponent();
+        }
+
+        private void StoreWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoadAllStores();
+        }
+
+        private void LoadAllStores()
+        {
+            using var db = new BookStoreDbContext();
+
+            var stores = db.BookStores
+                 .Where(stores => stores.Name != null)
+                 .ToList();
+
+
+            myListBox.ItemsSource = new ObservableCollection<BookStore>(stores);
+
         }
     }
 }

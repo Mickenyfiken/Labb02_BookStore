@@ -7,12 +7,21 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
-        <ListBox>
-            <ListBoxItem Content="Hello"/>
+
+        <ListBox 
+            BorderThickness="0" 
+            BorderBrush="Transparent" 
+            FontSize="12" 
+            FontWeight="Bold" 
+            Margin="10,10,10,10">
+            <TextBlock Text="Book Store Iventory" />
+            <!--<ListBoxItem Content="Hello"/>-->
         </ListBox>
     </Grid>
 </UserControl>
+
+    
