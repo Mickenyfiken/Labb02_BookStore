@@ -45,13 +45,17 @@ namespace Labb02_BookStore
         {
             using var db = new BookStoreDbContext();
 
-            var inventory = db.Inventories
-                .Include(i => i.Store)
-                .Include(i => i.Isbn13Navigation)
-                .Where(i => i.StoreId == store.Id)
+            var storeIsbns = db.Inventories
+                 .Where(i => i.StoreId == store.Id)
+                 .Select(i => i.Isbn13)
+                 .ToList();
+
+
+            var booksInInventory = db.Books
+                .Where(b => storeIsbns.Contains(b.Isbn13))                
                 .ToList();
 
-            var collection = new ObservableCollection<object>(inventory);
+            var collection = new ObservableCollection<object>(booksInInventory);
 
             myDataGrid.ItemsSource = collection;
         }
