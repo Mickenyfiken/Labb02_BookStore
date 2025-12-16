@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Labb02_BookStore.Models;
 
 namespace Labb02_BookStore.Views
 {
@@ -40,7 +41,7 @@ namespace Labb02_BookStore.Views
                  .ToList();
 
 
-            myListBox.ItemsSource = new ObservableCollection<BookStore>(stores);
+            //myListBox.ItemsSource = new ObservableCollection<BookStore>(stores);
 
         }
     }

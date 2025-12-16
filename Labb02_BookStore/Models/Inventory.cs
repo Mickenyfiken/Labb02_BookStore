@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Labb02_BookStore;
+namespace Labb02_BookStore.Models;
 
 public partial class Inventory
 {

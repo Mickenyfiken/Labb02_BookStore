@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Labb02_BookStore"
         xmlns:views="clr-namespace:Labb02_BookStore.Views"
+        xmlns:model="clr-namespace:Labb02_BookStore.Models"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         Loaded="MainWindow_Loaded">
@@ -13,13 +14,55 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
+        <!--<Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <views:StoreView Grid.Row="1" Grid.Column="0"/>
+        </Grid.RowDefinitions>-->
+
+        <TreeView x:Name="Stores" SelectedItemChanged="Stores_SelectedItemChanged">
+            <TreeView.Resources>
+                <HierarchicalDataTemplate DataType="{x:Type model:BookStore}" ItemsSource="{Binding Inventory}">
+                    <TextBlock>
+                        <Run Text="{Binding Name}" />
+ 
+                    </TextBlock>
+                </HierarchicalDataTemplate>
+
+                <HierarchicalDataTemplate DataType="{x:Type model:Inventory}">
+                    <TextBlock Text="{Binding StoreId}" />
+                </HierarchicalDataTemplate>
+            </TreeView.Resources>
+        </TreeView>
+
+
+        <DataGrid x:Name="myDataGrid" 
+                  Grid.Column="1"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  CanUserResizeColumns="False"
+                  CanUserResizeRows="False"
+                  CanUserReorderColumns="False"
+                  CanUserSortColumns="True"
+                  SelectionMode="Extended"
+                  SelectionUnit="CellOrRowHeader"
+                  RowHeaderWidth="20"
+                  HorizontalScrollBarVisibility="Visible"
+                  AlternationCount="2"
+                  RowBackground="White"
+                  AlternatingRowBackground="NavajoWhite"
+        >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Book Name" Width="*" Binding="{Binding StoreId}" />
+                
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+        <!--<views:StoreView Grid.Row="1" Grid.Column="0"/>
         <views:InventoryView Grid.Row="1" Grid.Column="1"/>
-        <views:MenuView Grid.Row="0" Grid.ColumnSpan="2"/>
+        <views:MenuView Grid.Row="0" Grid.ColumnSpan="2"/>-->
     </Grid>
 <!--https://app.uizard.io/templates/K74V5VKljaFxdgKAxYE7/preview-->
 

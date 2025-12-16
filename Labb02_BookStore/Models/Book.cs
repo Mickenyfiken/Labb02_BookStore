@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Channels;
 
-namespace Labb02_BookStore;
+namespace Labb02_BookStore.Models;
 
 public partial class Book
 {
