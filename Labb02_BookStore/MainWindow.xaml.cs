@@ -37,19 +37,21 @@ namespace Labb02_BookStore
         {
             if (e.NewValue is BookStore store)
             {
-                LoadBooks(store);
+                LoadInventory(store);
             }
         }
 
-        private void LoadBooks(BookStore store)
+        private void LoadInventory(BookStore store)
         {
             using var db = new BookStoreDbContext();
 
-            var books = db.Inventories
+            var inventory = db.Inventories
+                .Include(i => i.Store)
+                .Include(i => i.Isbn13Navigation)
                 .Where(i => i.StoreId == store.Id)
                 .ToList();
 
-            var collection = new ObservableCollection<object>(books);
+            var collection = new ObservableCollection<object>(inventory);
 
             myDataGrid.ItemsSource = collection;
         }
@@ -58,7 +60,9 @@ namespace Labb02_BookStore
         {
             using var db = new BookStoreDbContext();
 
-            var bookStores = db.BookStores.ToList();
+            var bookStores = db.BookStores
+                .Include(bs => bs.Inventories)
+                .ToList();
 
             Stores.ItemsSource = new ObservableCollection<BookStore>(bookStores);
                 
