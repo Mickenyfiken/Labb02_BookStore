@@ -1,4 +1,6 @@
 ﻿using System.Collections.ObjectModel;
+using System.IO;
+using System.Reflection.Emit;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -38,7 +40,30 @@ namespace Labb02_BookStore
             if (e.NewValue is BookStore store)
             {
                 LoadInventory(store);
+                LoadStoreDetails(store);
             }
+        }
+
+        private void LoadStoreDetails(BookStore store)
+        {
+            using var db = new BookStoreDbContext();
+
+            var storeDetail = db.BookStores
+                .Where(sd => sd.Id == store.Id)
+                .Select(sd => new 
+                {
+                    Name = sd.Name, 
+                    Adress = sd.Street, 
+                    Zipcode = sd.Zipcode, 
+                    City = sd.City, 
+                    Country = sd.Country
+                })
+                .ToList();
+
+            var collection = new ObservableCollection<object>(storeDetail);
+
+            storeDetailGrid.ItemsSource = collection;
+
         }
 
         private void LoadInventory(BookStore store)

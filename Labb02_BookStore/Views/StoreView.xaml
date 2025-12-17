@@ -7,43 +7,16 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Loaded="StoreWindow_Loaded">
-    <!--<Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <TextBlock Text="Book Stores" 
-               FontSize="20" 
-               FontWeight="Bold" 
-               Margin="0,0,0,10" />
-        <ListBox x:Name="myListBox">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Name}" />
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+    <Grid>
+        <DataGrid x:Name="storeDetailView"
+            >
+            <DataGridTextColumn Header="Store Detail" Binding="{Binding }"/>
+            
 
 
-    </Grid>-->
+        </DataGrid>
 
-    <StackPanel>
-        <TextBlock Text="Book Stores" 
-               FontSize="20" 
-               FontWeight="Bold" 
-               Margin="10,10,10,10" />
 
-        <ListBox x:Name="myListBox" 
-                 BorderThickness="0" 
-                 BorderBrush="Transparent" 
-                 FontSize="12" 
-                 FontWeight="Bold" 
-                 Margin="10,10,10,10">
-            <ListBox.ItemTemplate>
-                <DataTemplate >
-                    <TextBlock Text="{Binding Name}"/>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        
-    </StackPanel>
+    </Grid>
+
 </UserControl>

@@ -9,17 +9,26 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         Loaded="MainWindow_Loaded">
+    
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBlock}" x:Key="RightJustifiedTextCell">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="TextAlignment" Value="Right"/>
+        </Style>
+    </Window.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <!--<Grid.RowDefinitions>
+        <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>-->
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-        <TreeView x:Name="Stores" SelectedItemChanged="Stores_SelectedItemChanged">
+        <TreeView x:Name="Stores" SelectedItemChanged="Stores_SelectedItemChanged" Grid.Row="1">
             <TreeView.Resources>
                 <HierarchicalDataTemplate  DataType="{x:Type model:BookStore}" ItemsSource="{Binding Inventory}">
                     <TextBlock>
@@ -37,6 +46,7 @@
 
         <DataGrid x:Name="myDataGrid" 
                   Grid.Column="1"
+                  Grid.Row="1"
                   AutoGenerateColumns="True"
                   IsReadOnly="True"
                   CanUserAddRows="False"
@@ -61,9 +71,24 @@
         </DataGrid>
 
 
+        <DataGrid x:Name="storeDetailGrid"
+                  Grid.Column="0"
+                  Grid.Row="2"
+                  AutoGenerateColumns="False"  
+            >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Store Details" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Store Details" Binding="{Binding Adress}"/>
+                <DataGridTextColumn Header="Store Details" Binding="{Binding Zipcode}" ElementStyle="{StaticResource RightJustifiedTextCell}"/>
+                <DataGridTextColumn Header="Store Details" Binding="{Binding City}"/>
+                <DataGridTextColumn Header="Store Details" Binding="{Binding Country}"/>
+            </DataGrid.Columns>
+            
+        </DataGrid>
+        
         <!--<views:StoreView Grid.Row="1" Grid.Column="0"/>
-        <views:InventoryView Grid.Row="1" Grid.Column="1"/>
-        <views:MenuView Grid.Row="0" Grid.ColumnSpan="2"/>-->
+        <views:InventoryView Grid.Row="1" Grid.Column="1"/>-->
+        <views:MenuView Grid.Row="0" Grid.ColumnSpan="2"/>
     </Grid>
 <!--https://app.uizard.io/templates/K74V5VKljaFxdgKAxYE7/preview-->
 
