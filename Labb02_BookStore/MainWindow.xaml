@@ -21,7 +21,7 @@
 
         <TreeView x:Name="Stores" SelectedItemChanged="Stores_SelectedItemChanged">
             <TreeView.Resources>
-                <HierarchicalDataTemplate DataType="{x:Type model:BookStore}" ItemsSource="{Binding Inventory}">
+                <HierarchicalDataTemplate  DataType="{x:Type model:BookStore}" ItemsSource="{Binding Inventory}">
                     <TextBlock>
                         <Run Text="{Binding Name}" />
  
@@ -37,7 +37,7 @@
 
         <DataGrid x:Name="myDataGrid" 
                   Grid.Column="1"
-                  AutoGenerateColumns="False"
+                  AutoGenerateColumns="True"
                   IsReadOnly="True"
                   CanUserAddRows="False"
                   CanUserDeleteRows="False"
@@ -55,7 +55,7 @@
         >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Book Name" Width="*" Binding="{Binding Title}" />
-                <DataGridTextColumn Header="Balance" Width="*" Binding="{Binding Balance}" />
+                <DataGridTextColumn Header="Balance" Width="*" Binding="{Binding Authors}" />
                 
             </DataGrid.Columns>
         </DataGrid>
