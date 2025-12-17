@@ -1,77 +1,78 @@
 
 
-Saker som måste implementeras i labben under julen:
+Saker som mÃ¥ste implementeras i labben under julen:
 
-- Visa exemplar per butik.
-- Visa ISBN13 nummer.
-- Visa priset per butik.
-- Visa en lista på böckerna som finns och kunna lägga till i valfri butik.
-- Kunna uppdatera böcker direkt i tabellen. Byta namn/författare osv.
-- När man väljer butik, öppna en ny vy(under listan med butiker) med info ang vald butik samt kanppar för att lägga till/ta bort och uppdatera böcker.
+- Visa exemplar per butik. - Erik 
+- Visa ISBN13 nummer. - Erik
+- Visa priset per butik. - Erik
+- Visa en lista pÃ¥ bÃ¶ckerna som finns och kunna lÃ¤gga till i valfri butik. - Erik
+- Kunna uppdatera bÃ¶cker direkt i tabellen. Byta namn/fÃ¶rfattare osv. - Senare
+- NÃ¤r man vÃ¤ljer butik, Ã¶ppna en ny vy(under listan med butiker) med info ang vald butik samt kanppar fÃ¶r att lÃ¤gga till/ta bort och uppdatera bÃ¶cker. - Mikael
 
 
-- Göra om UX så den är lätt att använda samt ser proffsigare ut.
-- Skriva sammanfattning, info står längre ner
-- Kunna Ta bort böcker och affärer. Ha en "active Store" som i quizappen.
+- GÃ¶ra om UX sÃ¥ den Ã¤r lÃ¤tt att anvÃ¤nda samt ser proffsigare ut.
+- Skriva sammanfattning, info stÃ¥r lÃ¤ngre ner
+- Kunna Ta bort bÃ¶cker och affÃ¤rer. Ha en "active Store" som i quizappen.
 
 *** KRAV ***  *** KRAV ***  *** KRAV ***  *** KRAV ***  *** KRAV ***  *** KRAV ***  *** KRAV *** 
 
-Inlämningsuppgift
+InlÃ¤mningsuppgift
 Labb 2 - Utveckla en relationsdatabasapp med Entity Framework
 
-I denna labb utvecklar vi en applikation i C# som använder Entity Framework för att låta användaren läsa och uppdatera data i en databas. 
-Ni väljer själva om ni vill göra en Console- eller WPF-App, så länge funktionaliteten är på plats. 
-Ni kan välja på ett av de föreslagna projekten nedan, eller hitta på en egen idé och skapa en databas med code first och migrations.
+I denna labb utvecklar vi en applikation i C# som anvÃ¤nder Entity Framework fÃ¶r att lÃ¥ta anvÃ¤ndaren lÃ¤sa och uppdatera data i en databas. 
+Ni vÃ¤ljer sjÃ¤lva om ni vill gÃ¶ra en Console- eller WPF-App, sÃ¥ lÃ¤nge funktionaliteten Ã¤r pÃ¥ plats. 
+Ni kan vÃ¤lja pÃ¥ ett av de fÃ¶reslagna projekten nedan, eller hitta pÃ¥ en egen idÃ© och skapa en databas med code first och migrations.
 
  
-Förslag 1 - App för administration av bokhandel
-Skriv en applikation kopplad mot databasen för bokhandel som ni skapade i labb 1. Användaren ska kunna lista lagersaldo för 
-de olika butikerna, samt kunna lägga till och ta bort böcker från butikerna. När man lägger till böcker ska man kunna välja från samtliga böcker som redan finns i sortimentet (boktabellen).
-För VG ska användaren dessutom kunna lägga till nya titlar i sortimentet, och då kunna välja bland befintliga författare. 
-Man ska även kunna lägga till nya författare. När man lägger in nya böcker/författare måste man kunna mata in all data om dessa, 
-som t.ex antal sidor, pris, och utgivningsdatum. Man ska även kunna redigera och ta bort titlar och författare.
+FÃ¶rslag 1 - App fÃ¶r administration av bokhandel
+Skriv en applikation kopplad mot databasen fÃ¶r bokhandel som ni skapade i labb 1. AnvÃ¤ndaren ska kunna lista lagersaldo fÃ¶r 
+de olika butikerna, samt kunna lÃ¤gga till och ta bort bÃ¶cker frÃ¥n butikerna. NÃ¤r man lÃ¤gger till bÃ¶cker ska man kunna vÃ¤lja frÃ¥n samtliga bÃ¶cker som redan finns i sortimentet (boktabellen).
+FÃ¶r VG ska anvÃ¤ndaren dessutom kunna lÃ¤gga till nya titlar i sortimentet, och dÃ¥ kunna vÃ¤lja bland befintliga fÃ¶rfattare. 
+Man ska Ã¤ven kunna lÃ¤gga till nya fÃ¶rfattare. NÃ¤r man lÃ¤gger in nya bÃ¶cker/fÃ¶rfattare mÃ¥ste man kunna mata in all data om dessa, 
+som t.ex antal sidor, pris, och utgivningsdatum. Man ska Ã¤ven kunna redigera och ta bort titlar och fÃ¶rfattare.
 
  
-Förslag 2 - App för att skapa och redigera spellistor
-Skriv en applikation kopplad mot schema music i everyloop. Användaren ska kunna skapa nya, ta bort, samt modifiera befintliga playlists genom 
-att välja från biblioteket av låtar (från tabellen tracks).
-För VG ska användaren dessutom kunna lägga in nya artister, album och låtar, samt redigera och ta bort dessa. 
-Förutom titlar ska man kunna se och redigera längden på låtarna.
+FÃ¶rslag 2 - App fÃ¶r att skapa och redigera spellistor
+Skriv en applikation kopplad mot schema music i everyloop. AnvÃ¤ndaren ska kunna skapa nya, ta bort, samt modifiera befintliga playlists genom 
+att vÃ¤lja frÃ¥n biblioteket av lÃ¥tar (frÃ¥n tabellen tracks).
+FÃ¶r VG ska anvÃ¤ndaren dessutom kunna lÃ¤gga in nya artister, album och lÃ¥tar, samt redigera och ta bort dessa. 
+FÃ¶rutom titlar ska man kunna se och redigera lÃ¤ngden pÃ¥ lÃ¥tarna.
 
  
-Egna förslag
-Ni kan också föreslå egna projekt, men kom ihåg att ni i så fall ska beskriva idén och omfånget och få den godkänd av 
-mig innan ni påbörjar utvecklingsarbetet. Minst två tabeller och att användaren både kan läsa och uppdatera data i databasen på något sätt. Samt, för VG, ytterligare någon eller några tabeller och mer funktionalitet.
-För VG se förslag 1 och 2 ovan för att få en idé om hur stort omfånget på projektet bör vara. (Överenskommelse krävs)
+Egna fÃ¶rslag
+Ni kan ocksÃ¥ fÃ¶reslÃ¥ egna projekt, men kom ihÃ¥g att ni i sÃ¥ fall ska beskriva idÃ©n och omfÃ¥nget och fÃ¥ den godkÃ¤nd av 
+mig innan ni pÃ¥bÃ¶rjar utvecklingsarbetet. Minst tvÃ¥ tabeller och att anvÃ¤ndaren bÃ¥de kan lÃ¤sa och uppdatera data i databasen pÃ¥ nÃ¥got sÃ¤tt. Samt, fÃ¶r VG, ytterligare nÃ¥gon eller nÃ¥gra tabeller och mer funktionalitet.
+FÃ¶r VG se fÃ¶rslag 1 och 2 ovan fÃ¶r att fÃ¥ en idÃ© om hur stort omfÃ¥nget pÃ¥ projektet bÃ¶r vara. (Ã–verenskommelse krÃ¤vs)
 
  
-Några förslag på idéer:
-App där man kan bygga ihop lekar av pokemon-/magic-kort från en databas.
-Kokbok-app där användare kan lägga in recept och kommentera och betygsätta.
+NÃ¥gra fÃ¶rslag pÃ¥ idÃ©er:
+App dÃ¤r man kan bygga ihop lekar av pokemon-/magic-kort frÃ¥n en databas.
+Kokbok-app dÃ¤r anvÃ¤ndare kan lÃ¤gga in recept och kommentera och betygsÃ¤tta.
 
  
 Redovisning
 
-Uppgiften kan göras självständig eller i par. Om ni jobbar i par så ska båda lämna in en kopia på  (backup av ) 
-databasen, en länk till gemensamt GitHub-repo, samt skriva i en kommentar på itslearning vem ni jobbat ihop med. (Detta för att jag enkelt ska kunna rätta och slippa dubbelarbete).
+Uppgiften kan gÃ¶ras sjÃ¤lvstÃ¤ndig eller i par. Om ni jobbar i par sÃ¥ ska bÃ¥da lÃ¤mna in en kopia pÃ¥  (backup av ) 
+databasen, en lÃ¤nk till gemensamt GitHub-repo, samt skriva i en kommentar pÃ¥ itslearning vem ni jobbat ihop med. (Detta fÃ¶r att jag enkelt ska kunna rÃ¤tta och slippa dubbelarbete).
 
 
 Betygskriterier
 
-För godkänt krävs:
+FÃ¶r godkÃ¤nt krÃ¤vs:
  
-Man ska kunna utföra samtliga CRUD-operationer mot en relationsdatabas med Entity Framework i applikationen
-Databasen ska innehålla minst 2 tabeller med relevanta relationer.
-Samtliga 2 tabeller ska på något sätt användas i applikaitonen.
-Det ska gå att clona repot och köra applikationen på ett smidigt sätt. Det ska finnas en Readme med instruktion om hur man kommer igång och testar appen. 
-(Har du möjlighet så testa gärna att checka ut och köra projektet på en ny dator för att se att det fungerar.)
-Minst 10 st incheckningar till github – med genomtänkta commit messages – vid olika tillfällen under utvecklingens gång, så att man kan följa hur projektet utvecklas.
+Man ska kunna utfÃ¶ra samtliga CRUD-operationer mot en relationsdatabas med Entity Framework i applikationen
+Databasen ska innehÃ¥lla minst 2 tabeller med relevanta relationer.
+Samtliga 2 tabeller ska pÃ¥ nÃ¥got sÃ¤tt anvÃ¤ndas i applikaitonen.
+Det ska gÃ¥ att clona repot och kÃ¶ra applikationen pÃ¥ ett smidigt sÃ¤tt. Det ska finnas en Readme med instruktion om hur man kommer igÃ¥ng och testar appen. 
+(Har du mÃ¶jlighet sÃ¥ testa gÃ¤rna att checka ut och kÃ¶ra projektet pÃ¥ en ny dator fÃ¶r att se att det fungerar.)
+Minst 10 st incheckningar till github â€“ med genomtÃ¤nkta commit messages â€“ vid olika tillfÃ¤llen under utvecklingens gÃ¥ng, sÃ¥ att man kan fÃ¶lja hur projektet utvecklas.
 
-För väl godkänt krävs:
+FÃ¶r vÃ¤l godkÃ¤nt krÃ¤vs:
 
-Samtliga krav för godkänt är uppfyllda.
-VG-uppgiften för det valda förslaget är uppfyllt.
-All kommunikation mot databasen ska vara asynkron och inte låsa upp UI-tråden.
-Det är också högre krav på kvalitet vad gäller kod, UI-design och testning. (Den ska kännas som en färdig/komplett app, 
-med ett genomtänkt och intuitivt användargränssnitt – utan uppenbara buggar. Testa gärna din design på någon annan för att se hur den används och vad som kan förbättras.)
+Samtliga krav fÃ¶r godkÃ¤nt Ã¤r uppfyllda.
+VG-uppgiften fÃ¶r det valda fÃ¶rslaget Ã¤r uppfyllt.
+All kommunikation mot databasen ska vara asynkron och inte lÃ¥sa upp UI-trÃ¥den.
+Det Ã¤r ocksÃ¥ hÃ¶gre krav pÃ¥ kvalitet vad gÃ¤ller kod, UI-design och testning. (Den ska kÃ¤nnas som en fÃ¤rdig/komplett app, 
+med ett genomtÃ¤nkt och intuitivt anvÃ¤ndargrÃ¤nssnitt â€“ utan uppenbara buggar. Testa gÃ¤rna din design pÃ¥ nÃ¥gon annan fÃ¶r att se hur den anvÃ¤nds och vad som kan fÃ¶rbÃ¤ttras.)
+
 
