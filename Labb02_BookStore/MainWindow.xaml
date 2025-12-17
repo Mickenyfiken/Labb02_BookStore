@@ -54,7 +54,7 @@
                   AlternatingRowBackground="NavajoWhite"
         >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Book Name" Width="*" Binding="{Binding Title}" />
+                <DataGridTextColumn Header="Book Name" Width="*" Binding="{Binding Isbn13Navigation.Title}" />
                 <DataGridTextColumn Header="Balance" Width="*" Binding="{Binding Authors}" />
                 
             </DataGrid.Columns>
