@@ -12,9 +12,7 @@ namespace Labb02_BookStore.Presentation.ViewModels
     class MainWindowViewModel : ViewModelBase
     {
 
-
-
-        public ObservableCollection<string?> BookStores { get; private set; }
+        public ObservableCollection<BookStore> BookStores { get; private set; }
 
         public MainWindowViewModel()
         {
@@ -25,9 +23,9 @@ namespace Labb02_BookStore.Presentation.ViewModels
         {
             using var db = new BookStoreDbContext();
 
-            BookStores = new ObservableCollection<string?>
+            BookStores = new ObservableCollection<BookStore>
                 (
-                    db.BookStores.Select(bs => bs.Name).ToList()
+                    db.BookStores.ToList()
                 );
 
         }

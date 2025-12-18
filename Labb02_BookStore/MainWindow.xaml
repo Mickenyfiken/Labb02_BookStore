@@ -7,6 +7,7 @@
         xmlns:model="clr-namespace:Labb02_BookStore.Domain;assembly=Labb02_BookStore.Domain"
         xmlns:UI="clr-namespace:Labb02_BookStore.Presentation.ViewModels"
         mc:Ignorable="d"
+        d:Height="800"
         Title="MainWindow" Height="450" Width="800"
         
         >
@@ -30,12 +31,36 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+            <Button 
+                Grid.Row="0"
+                Margin="5"
+                Content="Add Store" 
+                Width="65"
+                Height="20"
+                
+                >
+            </Button>
+            <Button 
+                Grid.Row="0"
+                Margin="5"
+                Content="Delete Store" 
+                Width="65"
+                Height="20"
+                Click="Button_Click"
+                >
+            </Button>
+
+
+
+        </StackPanel>
+
+
         <TreeView x:Name="Stores" SelectedItemChanged="Stores_SelectedItemChanged" Grid.Row="1">
             <TreeView.Resources>
                 <HierarchicalDataTemplate DataType="{x:Type model:BookStore}" ItemsSource="{Binding BookStores}">
                     <TextBlock>
                         <Run Text="{Binding Name}" />
- 
                     </TextBlock>
                 </HierarchicalDataTemplate>
 
@@ -50,7 +75,7 @@
                   Grid.Column="1"
                   Grid.Row="1"
                   AutoGenerateColumns="True"
-                  IsReadOnly="True"
+                  IsReadOnly="False"
                   CanUserAddRows="False"
                   CanUserDeleteRows="False"
                   CanUserResizeColumns="False"
@@ -70,6 +95,7 @@
                 <DataGridTextColumn Header="Balance" Width="*" Binding="{Binding Authors}" />
                 
             </DataGrid.Columns>
+
         </DataGrid>
 
 
@@ -77,17 +103,43 @@
                   Grid.Column="0"
                   Grid.Row="2"
                   AutoGenerateColumns="False"  
+                  IsReadOnly="False"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  CanUserResizeColumns="False"
+                  CanUserResizeRows="False"
+                  CanUserReorderColumns="False"
+                  CanUserSortColumns="True"
+                  SelectionMode="Extended"
+                  SelectionUnit="CellOrRowHeader"
+                  RowHeaderWidth="20"
             >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Store Details" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Store Details" Binding="{Binding Adress}"/>
-                <DataGridTextColumn Header="Store Details" Binding="{Binding Zipcode}" ElementStyle="{StaticResource RightJustifiedTextCell}"/>
-                <DataGridTextColumn Header="Store Details" Binding="{Binding City}"/>
-                <DataGridTextColumn Header="Store Details" Binding="{Binding Country}"/>
+                <DataGridTextColumn Header="Store Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Store Adress" Binding="{Binding Street}"/>
+                <DataGridTextColumn Header="Store Zipcode" Binding="{Binding Zipcode}" ElementStyle="{StaticResource RightJustifiedTextCell}"/>
+                <DataGridTextColumn Header="Store City" Binding="{Binding City}"/>
+                <DataGridTextColumn Header="Store Country" Binding="{Binding Country}"/>
             </DataGrid.Columns>
-            
+
+
+
         </DataGrid>
-        
+
+        <ComboBox 
+             x:Name="selectBookComboBox"
+             Grid.Column="1"
+             Width="200"
+             Margin="10"
+             IsEditable="True"
+             IsReadOnly="True"
+             Text="Select a book..."
+             VerticalAlignment="Center"
+             DisplayMemberPath="Title"
+             SelectedItem="{Binding SelectedBook, Mode=TwoWay}" 
+             />
+
+
         <!--<views:StoreView Grid.Row="1" Grid.Column="0"/>
         <views:InventoryView Grid.Row="1" Grid.Column="1"/>
         <views:MenuView Grid.Row="0" Grid.ColumnSpan="2"/>-->

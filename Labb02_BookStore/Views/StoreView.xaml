@@ -10,7 +10,7 @@
     <Grid>
         <DataGrid x:Name="storeDetailView"
             >
-            <DataGridTextColumn Header="Store Detail" Binding="{Binding }"/>
+            <DataGridTextColumn Header="Store Detail" />
             
 
 

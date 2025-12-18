@@ -23,7 +23,7 @@ namespace Labb02_BookStore
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        private MainWindowViewModel viewModel;
         public MainWindow()
         {
             InitializeComponent();
@@ -31,9 +31,13 @@ namespace Labb02_BookStore
 
             DataContext = new MainWindowViewModel();
 
-            //using var db = new BookStoreDbContext();
+            using var db = new BookStoreDbContext();
 
-            //var books = db.Books.ToList();
+            var books = db.Books.Where(b => b.Title == b.Title).ToList();
+
+            var booksCollection = new ObservableCollection<Book>(books);
+            
+            selectBookComboBox.ItemsSource = booksCollection;
 
             LoadBookStores();
 
@@ -42,9 +46,20 @@ namespace Labb02_BookStore
 
         }
 
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        //private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    //LoadBookStores();
+        //}
+
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //LoadBookStores();
+            if (Stores.SelectedItem is not null)
+            {
+                using var db = new BookStoreDbContext();
+
+
+
+            }
         }
 
         private void Stores_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
@@ -53,7 +68,8 @@ namespace Labb02_BookStore
             {
                 using var db = new BookStoreDbContext();
                 LoadInventory(store, db);
-                LoadStoreDetails(store, db);
+                storeDetailGrid.ItemsSource = new ObservableCollection<BookStore> { store };
+
             }
         }
 
