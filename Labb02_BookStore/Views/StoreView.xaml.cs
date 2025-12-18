@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Labb02_BookStore.Models;
+using Labb02_BookStore.Infrastructure.Data.Model;
 
 namespace Labb02_BookStore.Views
 {

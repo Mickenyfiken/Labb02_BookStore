@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Labb02_BookStore.Domain;
 
-namespace Labb02_BookStore.Models;
+namespace Labb02_BookStore.Domain;
 
 public partial class TitlesPerAuthor
 {

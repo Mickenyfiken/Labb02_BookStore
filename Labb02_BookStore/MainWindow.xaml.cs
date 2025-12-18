@@ -11,7 +11,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Labb02_BookStore.Models;
+using Labb02_BookStore.Domain;
+using Labb02_BookStore.Infrastructure.Data.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace Labb02_BookStore
@@ -39,14 +40,15 @@ namespace Labb02_BookStore
         {
             if (e.NewValue is BookStore store)
             {
-                LoadInventory(store);
-                LoadStoreDetails(store);
+                using var db = new BookStoreDbContext();
+                LoadInventory(store, db);
+                LoadStoreDetails(store, db);
             }
         }
 
-        private void LoadStoreDetails(BookStore store)
+        private void LoadStoreDetails(BookStore store, BookStoreDbContext db)
         {
-            using var db = new BookStoreDbContext();
+            
 
             var storeDetail = db.BookStores
                 .Where(sd => sd.Id == store.Id)
@@ -66,10 +68,8 @@ namespace Labb02_BookStore
 
         }
 
-        private void LoadInventory(BookStore store)
+        private void LoadInventory(BookStore store, BookStoreDbContext db)
         {
-            using var db = new BookStoreDbContext();
-
 
             var inventory = db.Inventories
                 .Where(i => i.StoreId == store.Id)

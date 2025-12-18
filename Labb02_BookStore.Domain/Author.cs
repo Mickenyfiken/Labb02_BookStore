@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Labb02_BookStore.Models;
+namespace Labb02_BookStore.Domain;
 
 public partial class Author
 {

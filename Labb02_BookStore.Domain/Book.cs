@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Channels;
 
-namespace Labb02_BookStore.Models;
+namespace Labb02_BookStore.Domain;
 
 public partial class Book
 {
@@ -27,11 +27,4 @@ public partial class Book
     public virtual ICollection<Author> Authors { get; set; } = new List<Author>();
 
     public virtual ICollection<Category> Categories { get; set; } = new List<Category>();
-}
-
-
-
-public class testCommit
-{
-
 }
