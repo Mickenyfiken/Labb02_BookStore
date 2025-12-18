@@ -4,7 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Labb02_BookStore"
-        xmlns:views="clr-namespace:Labb02_BookStore.Views"
+        xmlns:model="clr-namespace:Labb02_BookStore.Domain;assembly=Labb02_BookStore.Domain"
+        xmlns:UI="clr-namespace:Labb02_BookStore.Presentation.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         
@@ -18,7 +19,7 @@
     </Window.Resources>
     
         <!--xmlns:model="clr-namespace:Labb02_BookStore.Domain"-->
-    <!--<Grid>
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -31,16 +32,16 @@
 
         <TreeView x:Name="Stores" SelectedItemChanged="Stores_SelectedItemChanged" Grid.Row="1">
             <TreeView.Resources>
-                <HierarchicalDataTemplate  DataType="{x:Type model:BookStore}" ItemsSource="{Binding Inventory}">
+                <HierarchicalDataTemplate DataType="{x:Type model:BookStore}" ItemsSource="{Binding BookStores}">
                     <TextBlock>
                         <Run Text="{Binding Name}" />
  
                     </TextBlock>
                 </HierarchicalDataTemplate>
 
-                <HierarchicalDataTemplate DataType="{x:Type model:Inventory}">
+                <!--<HierarchicalDataTemplate DataType="{x:Type model:Inventory}">
                     <TextBlock Text="{Binding StoreId}" />
-                </HierarchicalDataTemplate>
+                </HierarchicalDataTemplate>-->
             </TreeView.Resources>
         </TreeView>
 
@@ -87,13 +88,13 @@
             
         </DataGrid>
         
-        <views:StoreView Grid.Row="1" Grid.Column="0"/>
+        <!--<views:StoreView Grid.Row="1" Grid.Column="0"/>
         <views:InventoryView Grid.Row="1" Grid.Column="1"/>
-        <views:MenuView Grid.Row="0" Grid.ColumnSpan="2"/>
+        <views:MenuView Grid.Row="0" Grid.ColumnSpan="2"/>-->
     </Grid>
-https://app.uizard.io/templates/K74V5VKljaFxdgKAxYE7/preview
 
-        <TreeView x:Name="myTreeView">
+
+        <!--<TreeView x:Name="myTreeView">
             <TreeView.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Firstname}" />

@@ -12,6 +12,8 @@ namespace Labb02_BookStore.Presentation.ViewModels
     class MainWindowViewModel : ViewModelBase
     {
 
+
+
         public ObservableCollection<string?> BookStores { get; private set; }
 
         public MainWindowViewModel()
