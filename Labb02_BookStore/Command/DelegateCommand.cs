@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Labb02_BookStore.Command
+namespace Labb02_BookStore.Presentation.Command
 {
     class DelegateCommand : ICommand
     {
@@ -13,6 +13,8 @@ namespace Labb02_BookStore.Command
         private readonly Func<object?, bool> canExecute;
 
         public event EventHandler? CanExecuteChanged;
+
+        public void RaiseCanExecuteChanged() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
 
         public DelegateCommand(Action<object?> execute, Func<object?, bool> canExecute = null)
         {

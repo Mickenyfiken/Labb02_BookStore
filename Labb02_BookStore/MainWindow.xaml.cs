@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Labb02_BookStore.Domain;
 using Labb02_BookStore.Infrastructure.Data.Model;
+using Labb02_BookStore.Presentation.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace Labb02_BookStore
@@ -27,87 +28,94 @@ namespace Labb02_BookStore
         {
             InitializeComponent();
 
-            Loaded += MainWindow_Loaded;
+
+            DataContext = new MainWindowViewModel();
+
+            using var db = new BookStoreDbContext();
+
+            var books = db.Books.ToList();
+
+            //Loaded += MainWindow_Loaded;
 
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            LoadBookStores();
+            //LoadBookStores();
         }
 
-        private void Stores_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
-        {
-            if (e.NewValue is BookStore store)
-            {
-                using var db = new BookStoreDbContext();
-                LoadInventory(store, db);
-                LoadStoreDetails(store, db);
-            }
-        }
+        //private void Stores_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        //{
+        //    if (e.NewValue is BookStore store)
+        //    {
+        //        using var db = new BookStoreDbContext();
+        //        LoadInventory(store, db);
+        //        LoadStoreDetails(store, db);
+        //    }
+        //}
 
-        private void LoadStoreDetails(BookStore store, BookStoreDbContext db)
-        {
+        //private void LoadStoreDetails(BookStore store, BookStoreDbContext db)
+        //{
             
 
-            var storeDetail = db.BookStores
-                .Where(sd => sd.Id == store.Id)
-                .Select(sd => new 
-                {
-                    Name = sd.Name, 
-                    Adress = sd.Street, 
-                    Zipcode = sd.Zipcode, 
-                    City = sd.City, 
-                    Country = sd.Country
-                })
-                .ToList();
+        //    var storeDetail = db.BookStores
+        //        .Where(sd => sd.Id == store.Id)
+        //        .Select(sd => new 
+        //        {
+        //            Name = sd.Name, 
+        //            Adress = sd.Street, 
+        //            Zipcode = sd.Zipcode, 
+        //            City = sd.City, 
+        //            Country = sd.Country
+        //        })
+        //        .ToList();
 
-            var collection = new ObservableCollection<object>(storeDetail);
+        //    var collection = new ObservableCollection<object>(storeDetail);
 
-            storeDetailGrid.ItemsSource = collection;
+        //    storeDetailGrid.ItemsSource = collection;
 
-        }
+        //}
 
-        private void LoadInventory(BookStore store, BookStoreDbContext db)
-        {
+        //private void LoadInventory(BookStore store, BookStoreDbContext db)
+        //{
 
-            var inventory = db.Inventories
-                .Where(i => i.StoreId == store.Id)
-                .Include(i => i.Isbn13Navigation)
-                    .ThenInclude(b => b.Authors)
-                .Include(i => i.Isbn13Navigation)
-                    .ThenInclude(b => b.Publisher)
-                .Include(i => i.Isbn13Navigation)
-                    .ThenInclude(b => b.Categories)
-                .AsNoTracking()
-                .ToList();
+        //    var inventory = db.Inventories
+        //        .Where(i => i.StoreId == store.Id)
+        //        .Include(i => i.Isbn13Navigation)
+        //            .ThenInclude(b => b.Authors)
+        //        .Include(i => i.Isbn13Navigation)
+        //            .ThenInclude(b => b.Publisher)
+        //        .Include(i => i.Isbn13Navigation)
+        //            .ThenInclude(b => b.Categories)
+        //        .AsNoTracking()
+        //        .ToList();
 
-            //var storeIsbns = db.Inventories
-            //     .Where(i => i.StoreId == store.Id)
-            //     .Select(i => i.Isbn13)
-            //     .ToList();
+        //    //var storeIsbns = db.Inventories
+        //    //     .Where(i => i.StoreId == store.Id)
+        //    //     .Select(i => i.Isbn13)
+        //    //     .ToList();
 
-            //var booksInInventory = db.Books
-            //    .Where(b => storeIsbns.Contains(b.Isbn13))
-            //    .Include(b => b.Authors)
-            //    .ToList();
+        //    //var booksInInventory = db.Books
+        //    //    .Where(b => storeIsbns.Contains(b.Isbn13))
+        //    //    .Include(b => b.Authors)
+        //    //    .ToList();
 
-            var collection = new ObservableCollection<object>(inventory);
+        //    var collection = new ObservableCollection<object>(inventory);
 
-            myDataGrid.ItemsSource = collection;
-        }
+        //    myDataGrid.ItemsSource = collection;
+        //}
 
-        private void LoadBookStores()
-        {
-            using var db = new BookStoreDbContext();
+        //private void LoadBookStores()
+        //{
+        //    using var db = new BookStoreDbContext();
 
-            var bookStores = db.BookStores
-                .Include(bs => bs.Inventories)
-                .ToList();
+        //    var bookStores = db.BookStores
+        //        .Include(bs => bs.Inventories)
+        //        .ToList();
 
-            Stores.ItemsSource = new ObservableCollection<BookStore>(bookStores);
+        //    Stores.ItemsSource = new ObservableCollection<BookStore>(bookStores);
                 
-        }
+        //}
 
         //private void LoadAuthors()
         //{

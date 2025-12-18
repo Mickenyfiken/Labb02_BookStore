@@ -27,22 +27,22 @@ namespace Labb02_BookStore.Views
             InitializeComponent();
         }
 
-        private void StoreWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            LoadAllStores();
-        }
+        //private void StoreWindow_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    LoadAllStores();
+        //}
 
-        private void LoadAllStores()
-        {
-            using var db = new BookStoreDbContext();
+        //private void LoadAllStores()
+        //{
+        //    using var db = new BookStoreDbContext();
 
-            var stores = db.BookStores
-                 .Where(stores => stores.Name != null)
-                 .ToList();
+        //    var stores = db.BookStores
+        //         .Where(stores => stores.Name != null)
+        //         .ToList();
 
 
             //myListBox.ItemsSource = new ObservableCollection<BookStore>(stores);
 
-        }
+        //}
     }
 }
