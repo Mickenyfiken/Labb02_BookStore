@@ -38,7 +38,7 @@
                 Content="Add Store" 
                 Width="65"
                 Height="20"
-                
+                Click="Button_Click_1"
                 >
             </Button>
             <Button 
@@ -121,7 +121,7 @@
                 <DataGridTextColumn Header="Store City" Binding="{Binding City}"/>
                 <DataGridTextColumn Header="Store Country" Binding="{Binding Country}"/>
             </DataGrid.Columns>
-
+            
 
 
         </DataGrid>

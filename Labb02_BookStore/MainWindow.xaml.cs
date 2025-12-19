@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Labb02_BookStore.Domain;
 using Labb02_BookStore.Infrastructure.Data.Model;
+using Labb02_BookStore.Presentation.Dialogs;
 using Labb02_BookStore.Presentation.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
@@ -40,6 +41,7 @@ namespace Labb02_BookStore
             selectBookComboBox.ItemsSource = booksCollection;
 
             LoadBookStores();
+
 
 
             //Loaded += MainWindow_Loaded;
@@ -136,6 +138,11 @@ namespace Labb02_BookStore
 
         }
 
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var dialog = new AddStoreDialog();
 
+            dialog.Show();
+        }
     }
 }
