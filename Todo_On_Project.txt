@@ -6,7 +6,7 @@ Saker som måste implementeras i labben under julen:
 - Visa ISBN13 nummer. - Erik
 - Visa priset per butik. - Erik
 - Visa en lista på böckerna som finns och kunna lägga till i valfri butik. - Erik
-- Kunna uppdatera böcker direkt i tabellen. Byta namn/författare osv. - Senare
+- Kunna uppdatera böcker i en ny vy. Byta namn/författare osv. - Erik
 - När man väljer butik, öppna en ny vy(under listan med butiker) med info ang vald butik samt knappar för att lägga till/ta bort och uppdatera böcker. - Mikael
 
 
@@ -74,6 +74,7 @@ VG-uppgiften för det valda förslaget är uppfyllt.
 All kommunikation mot databasen ska vara asynkron och inte låsa upp UI-tråden.
 Det är också högre krav på kvalitet vad gäller kod, UI-design och testning. (Den ska kännas som en färdig/komplett app, 
 med ett genomtänkt och intuitivt användargränssnitt – utan uppenbara buggar. Testa gärna din design på någon annan för att se hur den används och vad som kan förbättras.)
+
 
 
 
