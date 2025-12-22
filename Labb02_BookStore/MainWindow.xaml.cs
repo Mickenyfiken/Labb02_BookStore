@@ -1,4 +1,10 @@
-﻿using System.Collections.ObjectModel;
+﻿using Labb02_BookStore.Domain;
+using Labb02_BookStore.Infrastructure.Data.Model;
+using Labb02_BookStore.Presentation;
+using Labb02_BookStore.Presentation.Command;
+using Labb02_BookStore.Presentation.ViewModels;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Reflection.Emit;
 using System.Text;
@@ -11,36 +17,45 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Labb02_BookStore.Domain;
-using Labb02_BookStore.Infrastructure.Data.Model;
-using Labb02_BookStore.Presentation.ViewModels;
-using Microsoft.EntityFrameworkCore;
 
 namespace Labb02_BookStore
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 
     public partial class MainWindow : Window
     {
+       
+
+
+
 
         public MainWindow()
         {
             InitializeComponent();
-
+            
 
             DataContext = new MainWindowViewModel();
-
+            
             //using var db = new BookStoreDbContext();
 
             //var books = db.Books.ToList();
 
             LoadBookStores();
 
+           
+
+
 
             //Loaded += MainWindow_Loaded;
 
         }
+        
+
+
+
+
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
@@ -81,31 +96,13 @@ namespace Labb02_BookStore
 
         private void LoadInventory(BookStore store, BookStoreDbContext db)
         {
+            var inventories = db.Inventories
+             .Where(i => i.StoreId == store.Id)
+             .Include(i => i.Isbn13Navigation) 
+             .ToList();
 
-            var inventory = db.Inventories
-                .Where(i => i.StoreId == store.Id)
-                .Include(i => i.Isbn13Navigation)
-                    .ThenInclude(b => b.Authors)
-                .Include(i => i.Isbn13Navigation)
-                    .ThenInclude(b => b.Publisher)
-                .Include(i => i.Isbn13Navigation)
-                    .ThenInclude(b => b.Categories)
-                .AsNoTracking()
-                .ToList();
-
-            //var storeIsbns = db.Inventories
-            //     .Where(i => i.StoreId == store.Id)
-            //     .Select(i => i.Isbn13)
-            //     .ToList();
-
-            //var booksInInventory = db.Books
-            //    .Where(b => storeIsbns.Contains(b.Isbn13))
-            //    .Include(b => b.Authors)
-            //    .ToList();
-
-            var collection = new ObservableCollection<object>(inventory);
-
-            myDataGrid.ItemsSource = collection;
+            myDataGrid.ItemsSource =
+                   new ObservableCollection<Inventory>(inventories);
         }
 
         private void LoadBookStores()

@@ -7,50 +7,51 @@
         xmlns:model="clr-namespace:Labb02_BookStore.Domain;assembly=Labb02_BookStore.Domain"
         xmlns:UI="clr-namespace:Labb02_BookStore.Presentation.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
-        
-        >
-    
+        WindowState="Maximized"
+        Title="MainWindow" Height="450" Width="800">
+
     <Window.Resources>
         <Style TargetType="{x:Type TextBlock}" x:Key="RightJustifiedTextCell">
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
             <Setter Property="TextAlignment" Value="Right"/>
         </Style>
     </Window.Resources>
-    
-        <!--xmlns:model="clr-namespace:Labb02_BookStore.Domain"-->
+
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <TreeView x:Name="Stores" SelectedItemChanged="Stores_SelectedItemChanged" Grid.Row="1">
-            <TreeView.Resources>
-                <HierarchicalDataTemplate DataType="{x:Type model:BookStore}" ItemsSource="{Binding BookStores}">
-                    <TextBlock>
-                        <Run Text="{Binding Name}" />
- 
-                    </TextBlock>
-                </HierarchicalDataTemplate>
+        <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Vertical">
+          <TreeView x:Name="Stores" SelectedItemChanged="Stores_SelectedItemChanged">
+                <TreeView.Resources>
+                    <HierarchicalDataTemplate DataType="{x:Type model:BookStore}" ItemsSource="{Binding BookStores}">
+                        <TextBlock>
+                            <Run Text="{Binding Name}" />
+                        </TextBlock>
+                    </HierarchicalDataTemplate>
+                </TreeView.Resources>
+            </TreeView>
+            <DataGrid x:Name="storeDetailGrid" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Store Details" Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Store Details" Binding="{Binding Adress}" />
+                    <DataGridTextColumn Header="Store Details" Binding="{Binding Zipcode}" ElementStyle="{StaticResource RightJustifiedTextCell}" />
+                    <DataGridTextColumn Header="Store Details" Binding="{Binding City}" />
+                    <DataGridTextColumn Header="Store Details" Binding="{Binding Country}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
 
-                <!--<HierarchicalDataTemplate DataType="{x:Type model:Inventory}">
-                    <TextBlock Text="{Binding StoreId}" />
-                </HierarchicalDataTemplate>-->
-            </TreeView.Resources>
-        </TreeView>
-
-
-        <DataGrid x:Name="myDataGrid" 
-                  Grid.Column="1"
-                  Grid.Row="1"
-                  AutoGenerateColumns="True"
-                  IsReadOnly="True"
+        <DataGrid x:Name="myDataGrid" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="False"
                   CanUserAddRows="False"
                   CanUserDeleteRows="False"
                   CanUserResizeColumns="False"
@@ -60,45 +61,40 @@
                   SelectionMode="Extended"
                   SelectionUnit="CellOrRowHeader"
                   RowHeaderWidth="20"
-                  HorizontalScrollBarVisibility="Visible"
+                  HorizontalScrollBarVisibility="Hidden"
                   AlternationCount="2"
                   RowBackground="White"
                   AlternatingRowBackground="NavajoWhite"
-        >
+                Height="Auto"
+                 >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Book Name" Width="*" Binding="{Binding Isbn13Navigation.Title}" />
-                <DataGridTextColumn Header="Balance" Width="*" Binding="{Binding Authors}" />
-                
+                <DataGridTextColumn Header="ISBN13" Binding="{Binding Isbn13}" />
+                <DataGridTextColumn Header="Title" Binding="{Binding Isbn13Navigation.Title}" />
+                <DataGridTextColumn Header="Price" Binding="{Binding Isbn13Navigation.Price}" />
+                <DataGridTextColumn Header="Quantity" Binding="{Binding Balance}" />
+                <DataGridTemplateColumn Header="Edit Book">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Edit"
+                            Padding="8,2"
+                            Command="{Binding DataContext.OpenBookEditWindowCommand,
+                                              RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                            CommandParameter="{Binding}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <!-- <DataGridTemplateColumn Header="Delete">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Delete Book"
+                            Padding="8,2"
+                            Command="{Binding DataContext.GoCommand,
+                                              RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                            CommandParameter="{Binding}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>-->
             </DataGrid.Columns>
         </DataGrid>
-
-
-        <DataGrid x:Name="storeDetailGrid"
-                  Grid.Column="0"
-                  Grid.Row="2"
-                  AutoGenerateColumns="False"  
-            >
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Store Details" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Store Details" Binding="{Binding Adress}"/>
-                <DataGridTextColumn Header="Store Details" Binding="{Binding Zipcode}" ElementStyle="{StaticResource RightJustifiedTextCell}"/>
-                <DataGridTextColumn Header="Store Details" Binding="{Binding City}"/>
-                <DataGridTextColumn Header="Store Details" Binding="{Binding Country}"/>
-            </DataGrid.Columns>
-            
-        </DataGrid>
-        
-        <!--<views:StoreView Grid.Row="1" Grid.Column="0"/>
-        <views:InventoryView Grid.Row="1" Grid.Column="1"/>
-        <views:MenuView Grid.Row="0" Grid.ColumnSpan="2"/>-->
     </Grid>
-
-
-        <!--<TreeView x:Name="myTreeView">
-            <TreeView.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Firstname}" />
-                </DataTemplate>
-            </TreeView.ItemTemplate>
-        </TreeView>-->
 </Window>
