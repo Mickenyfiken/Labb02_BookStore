@@ -26,16 +26,9 @@ namespace Labb02_BookStore
     /// 
     public partial class MainWindow : Window
     {
-       
-
-
-
-
-        public MainWindow()
+     public MainWindow()
         {
             InitializeComponent();
-            
-
             DataContext = new MainWindowViewModel();
             
             //using var db = new BookStoreDbContext();
@@ -43,20 +36,8 @@ namespace Labb02_BookStore
             //var books = db.Books.ToList();
 
             LoadBookStores();
-
-           
-
-
-
             //Loaded += MainWindow_Loaded;
-
         }
-        
-
-
-
-
-
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             //LoadBookStores();
@@ -74,9 +55,7 @@ namespace Labb02_BookStore
 
         private void LoadStoreDetails(BookStore store, BookStoreDbContext db)
         {
-
-
-            var storeDetail = db.BookStores
+               var storeDetail = db.BookStores
                 .Where(sd => sd.Id == store.Id)
                 .Select(sd => new
                 {
@@ -89,9 +68,7 @@ namespace Labb02_BookStore
                 .ToList();
 
             var collection = new ObservableCollection<object>(storeDetail);
-
             storeDetailGrid.ItemsSource = collection;
-
         }
 
         private void LoadInventory(BookStore store, BookStoreDbContext db)
@@ -114,9 +91,6 @@ namespace Labb02_BookStore
                 .ToList();
 
             Stores.ItemsSource = new ObservableCollection<BookStore>(bookStores);
-
         }
-
-
-    }
+     }
 }

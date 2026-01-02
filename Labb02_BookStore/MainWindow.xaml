@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Labb02_BookStore"
         xmlns:model="clr-namespace:Labb02_BookStore.Domain;assembly=Labb02_BookStore.Domain"
         xmlns:UI="clr-namespace:Labb02_BookStore.Presentation.ViewModels"
+        xmlns:views="clr-namespace:Labb02_BookStore.Views"
         mc:Ignorable="d"
         WindowState="Maximized"
         Title="MainWindow" Height="450" Width="800">
@@ -16,28 +17,80 @@
             <Setter Property="TextAlignment" Value="Right"/>
         </Style>
     </Window.Resources>
+    
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Vertical">
-          <TreeView x:Name="Stores" SelectedItemChanged="Stores_SelectedItemChanged">
+        <views:MenuView Grid.Row="0" Grid.ColumnSpan="2"/>
+
+        <StackPanel Grid.Column="0" Grid.Row="1" VerticalAlignment="Top" Orientation="Vertical">
+            <TextBlock Text="Book Stores" FontSize="20" Padding="6" FontWeight="Bold"></TextBlock>
+            
+            <TreeView x:Name="Stores" SelectedItemChanged="Stores_SelectedItemChanged">
                 <TreeView.Resources>
-                    <HierarchicalDataTemplate DataType="{x:Type model:BookStore}" ItemsSource="{Binding BookStores}">
-                        <TextBlock>
+
+                    <Style TargetType="TreeViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="BorderBrush" Value="Transparent"/>
+                        <Setter Property="Padding" Value="4"/>
+
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="TreeViewItem">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Border x:Name="Bd"
+                                                Grid.Column="1"
+                                                Background="{TemplateBinding Background}"
+                                                CornerRadius="2"/>
+                                        <ContentPresenter Grid.Column="1"
+                                                          ContentSource="Header"
+                                                          HorizontalAlignment="Stretch"
+                                                          VerticalAlignment="Center"/>
+                                        <ItemsPresenter Grid.Column="1"
+                                                        Margin="18,0,0,0"/>
+                                     </Grid>     
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="Bd"
+                                                    Property="Background"
+                                                    Value="#FFE6F2FF"/>
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter TargetName="Bd"
+                                                    Property="Background"
+                                                    Value="#FFCCE5FF"/>     
+                                        </Trigger>  
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Opacity" Value="0.5"/>
+                                        </Trigger>
+
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                   <HierarchicalDataTemplate DataType="{x:Type model:BookStore}" ItemsSource="{Binding BookStores}">
+                        <TextBlock FontSize="16" Padding="6">
                             <Run Text="{Binding Name}" />
                         </TextBlock>
                     </HierarchicalDataTemplate>
                 </TreeView.Resources>
             </TreeView>
+            
             <DataGrid x:Name="storeDetailGrid" AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Store Details" Binding="{Binding Name}" />
@@ -49,52 +102,60 @@
             </DataGrid>
         </StackPanel>
 
-        <DataGrid x:Name="myDataGrid" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3"
-                  AutoGenerateColumns="False"
-                  IsReadOnly="False"
-                  CanUserAddRows="False"
-                  CanUserDeleteRows="False"
-                  CanUserResizeColumns="False"
-                  CanUserResizeRows="False"
-                  CanUserReorderColumns="False"
-                  CanUserSortColumns="True"
-                  SelectionMode="Extended"
-                  SelectionUnit="CellOrRowHeader"
-                  RowHeaderWidth="20"
-                  HorizontalScrollBarVisibility="Hidden"
-                  AlternationCount="2"
-                  RowBackground="White"
-                  AlternatingRowBackground="NavajoWhite"
-                Height="Auto"
-                 >
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="ISBN13" Binding="{Binding Isbn13}" />
-                <DataGridTextColumn Header="Title" Binding="{Binding Isbn13Navigation.Title}" />
-                <DataGridTextColumn Header="Price" Binding="{Binding Isbn13Navigation.Price}" />
-                <DataGridTextColumn Header="Quantity" Binding="{Binding Balance}" />
-                <DataGridTemplateColumn Header="Edit Book">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Content="Edit"
-                            Padding="8,2"
-                            Command="{Binding DataContext.OpenBookEditWindowCommand,
-                                              RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                            CommandParameter="{Binding}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <!-- <DataGridTemplateColumn Header="Delete">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Content="Delete Book"
-                            Padding="8,2"
-                            Command="{Binding DataContext.GoCommand,
-                                              RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                            CommandParameter="{Binding}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>-->
-            </DataGrid.Columns>
-        </DataGrid>
+        <Grid Grid.Column="1" Grid.Row="1" VerticalAlignment="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+
+            <TextBlock Grid.Row="0"
+                       FontSize="20"
+                       FontWeight="Bold"
+                       Padding="6">
+                <Run Text="Current Inventory:" />
+                <Run Text="{Binding ElementName=Stores, Path=SelectedItem.Name}" Foreground="#FFCCE5Ff" />
+            </TextBlock>
+
+
+
+
+            <DataGrid x:Name="myDataGrid"
+              Grid.Row="1"
+              AutoGenerateColumns="False"
+              IsReadOnly="False"
+              CanUserAddRows="False"
+              CanUserDeleteRows="False"
+              CanUserResizeColumns="False"
+              CanUserResizeRows="False"
+              CanUserReorderColumns="False"
+              CanUserSortColumns="True"
+              SelectionMode="Extended"
+              SelectionUnit="CellOrRowHeader"
+              RowHeaderWidth="20"
+              HorizontalScrollBarVisibility="Hidden"
+              AlternationCount="2"
+              RowBackground="White"
+              AlternatingRowBackground="#FFCCE5FF">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ISBN13" Binding="{Binding Isbn13}" />
+                    <DataGridTextColumn Header="Title" Binding="{Binding Isbn13Navigation.Title}" />
+                    <DataGridTextColumn Header="Price" Binding="{Binding Isbn13Navigation.Price}" />
+                    <DataGridTextColumn Header="Quantity" Binding="{Binding Balance}" />
+                    <DataGridTemplateColumn Header="Edit Book">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Edit"
+                                Padding="8,2"
+                                Command="{Binding DataContext.OpenBookEditWindowCommand,
+                                                  RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                CommandParameter="{Binding}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
     </Grid>
 </Window>

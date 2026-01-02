@@ -16,7 +16,9 @@ namespace Labb02_BookStore.Presentation.ViewModels
     class MainWindowViewModel : ViewModelBase
     {
         public ICommand OpenBookEditWindowCommand { get; }
-      
+        public ICommand DeleteBookFromStoreCommand { get; }
+
+
 
         public ObservableCollection<string?> BookStores { get; private set; }
 
@@ -24,10 +26,15 @@ namespace Labb02_BookStore.Presentation.ViewModels
         {
             LoadBookStores();
             OpenBookEditWindowCommand = new DelegateCommand(OpenBookEditWindow);
-           
+            DeleteBookFromStoreCommand = new DelegateCommand(DeleteBookFromStore);
         }
 
-        
+        private void DeleteBookFromStore(object parameter)
+        {
+            MessageBox.Show("hej");
+        }
+
+
         private void OpenBookEditWindow(object parameter)
         {
             var selectedBook = parameter as Inventory;
@@ -35,9 +42,9 @@ namespace Labb02_BookStore.Presentation.ViewModels
 
             var db = new BookStoreDbContext();
 
-            // Attach so EF tracks changes
+           
             db.Attach(selectedBook);
-
+            
             var vm = new BookEditViewModel(selectedBook, db);
 
             var window = new BookEditWindow

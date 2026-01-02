@@ -7,8 +7,7 @@
         mc:Ignorable="d"
         Title="BookEditWindow" Height="450" Width="800">
 
-    <!--<TextBox Text="{Binding Isbn13}"
-            Grid.Row="0" Grid.Column="1" Margin="0,0,0,5"/>-->
+    
 
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -52,6 +51,6 @@
                 Width="120"
                 Margin="0,10,0,0"
                 Command="{Binding SaveBookCommand}" />
-    </Grid>
+        </Grid>
 
 </Window>

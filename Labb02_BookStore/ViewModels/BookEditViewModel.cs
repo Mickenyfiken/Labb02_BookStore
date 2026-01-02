@@ -1,6 +1,7 @@
 ﻿using Labb02_BookStore.Domain;
 using Labb02_BookStore.Infrastructure.Data.Model;
 using Labb02_BookStore.Presentation.Command;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Labb02_BookStore.Presentation.ViewModels
@@ -23,6 +24,7 @@ namespace Labb02_BookStore.Presentation.ViewModels
 
         private void SaveEditedBook(object obj)
         {
+            MessageBox.Show("Changes Saved");
             _context.SaveChanges();
         }
     }

@@ -24,5 +24,10 @@ namespace Labb02_BookStore.Views
         {
             InitializeComponent();
         }
+
+        private void Exit_Program(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }
