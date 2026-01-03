@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Labb02_BookStore.Presentation.ViewModels;
 
 namespace Labb02_BookStore.Presentation.Dialogs
 {
@@ -19,9 +20,16 @@ namespace Labb02_BookStore.Presentation.Dialogs
     /// </summary>
     public partial class AddStoreDialog : Window
     {
+        public AddStoreViewModel AddStore { get; }
+
         public AddStoreDialog()
         {
             InitializeComponent();
+
+            AddStore = new AddStoreViewModel(this);
+            DataContext = AddStore;
+
+
         }
     }
 }

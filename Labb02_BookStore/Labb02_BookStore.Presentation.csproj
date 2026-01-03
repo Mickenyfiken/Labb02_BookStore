@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Labb02_BookStore.Domain\Labb02_BookStore.Domain.csproj" />
     <ProjectReference Include="..\Labb02_BookStore.Infrastructure\Labb02_BookStore.Infrastructure.csproj" />
   </ItemGroup>
 
