@@ -18,6 +18,8 @@ namespace Labb02_BookStore.Presentation.ViewModels
         public ICommand OpenBookEditWindowCommand { get; }
         public ICommand DeleteBookFromStoreCommand { get; }
 
+        private readonly BookStoreDbContext _context;
+        public Inventory SelectedBook { get; }
 
 
         public ObservableCollection<string?> BookStores { get; private set; }
@@ -31,7 +33,22 @@ namespace Labb02_BookStore.Presentation.ViewModels
 
         private void DeleteBookFromStore(object parameter)
         {
-            MessageBox.Show("hej");
+            var selectedBook = parameter as Inventory;
+            MessageBoxResult result = MessageBox.Show(
+            "Are you sure you want do Delete this book?",
+            "Confirmation",
+            MessageBoxButton.YesNo,
+            MessageBoxImage.Question
+);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                
+            }
+            else
+            {
+                
+            }
         }
 
 

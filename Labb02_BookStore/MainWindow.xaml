@@ -114,7 +114,7 @@
                        FontWeight="Bold"
                        Padding="6">
                 <Run Text="Current Inventory:" />
-                <Run Text="{Binding ElementName=Stores, Path=SelectedItem.Name}" Foreground="#FFCCE5Ff" />
+                <Run Text="{Binding ElementName=Stores, Path=SelectedItem.Name}" Foreground="#0077b6" />
             </TextBlock>
 
 
@@ -150,6 +150,17 @@
                                 Command="{Binding DataContext.OpenBookEditWindowCommand,
                                                   RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                 CommandParameter="{Binding}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Edit Book">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Delete"
+                                    Padding="8,2"
+                                    Command="{Binding DataContext.DeleteBookFromStoreCommand,
+                                                      RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                    CommandParameter="{Binding}" /> 
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
