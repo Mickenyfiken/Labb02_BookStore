@@ -22,12 +22,16 @@ namespace Labb02_BookStore.Presentation.ViewModels
         public AddStoreViewModel(Window window)
         {
             AddCommand = new DelegateCommand(d =>
-        {
-            window.DialogResult = true;
-            window.Close();
-        });
+            {
+                window.DialogResult = true;
+                window.Close();
+            });
 
+            CancelCommand = new DelegateCommand(d =>
+            {
+                window.DialogResult = false;
+                window.Close();
+            });
         }
-
     }
 }

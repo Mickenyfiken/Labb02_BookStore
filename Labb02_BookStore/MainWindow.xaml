@@ -38,7 +38,7 @@
                 Content="Add Store" 
                 Width="65"
                 Height="20"
-                Click="Button_Click_1"
+                Command="{Binding OpenAddStoreDialogCommand}"
                 >
             </Button>
             <Button 

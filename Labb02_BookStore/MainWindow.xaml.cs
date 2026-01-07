@@ -59,8 +59,6 @@ namespace Labb02_BookStore
             {
                 using var db = new BookStoreDbContext();
 
-
-
             }
         }
 
@@ -138,11 +136,5 @@ namespace Labb02_BookStore
 
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            var dialog = new AddStoreDialog();
-
-            dialog.Show();
-        }
     }
 }

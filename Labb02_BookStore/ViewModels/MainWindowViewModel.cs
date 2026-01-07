@@ -36,6 +36,8 @@ namespace Labb02_BookStore.Presentation.ViewModels
 
             if (dialog.ShowDialog() == true)
             {
+                var db = new BookStoreDbContext();
+
                 var vm = dialog.AddStore;
 
                 var store = new BookStore
@@ -46,6 +48,10 @@ namespace Labb02_BookStore.Presentation.ViewModels
                     City = vm.City,
                     Country = vm.Country
                 };
+
+                db.BookStores.AddAsync(store);
+                db.SaveChangesAsync();
+                BookStores.Add(store);
             }
 
         }

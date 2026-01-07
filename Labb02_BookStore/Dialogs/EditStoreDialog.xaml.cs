@@ -11,24 +11,17 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Labb02_BookStore.Presentation.ViewModels;
 
 namespace Labb02_BookStore.Presentation.Dialogs
 {
     /// <summary>
-    /// Interaction logic for AddStoreDialog.xaml
+    /// Interaction logic for EditStoreDialog.xaml
     /// </summary>
-    public partial class AddStoreDialog : Window
+    public partial class EditStoreDialog : Window
     {
-        public AddStoreViewModel AddStore { get; }
-
-        public AddStoreDialog()
+        public EditStoreDialog()
         {
             InitializeComponent();
-
-            AddStore = new AddStoreViewModel(this);
-            DataContext = AddStore;
-
         }
     }
 }
