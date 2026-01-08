@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Labb02_BookStore.Domain;
+using Labb02_BookStore.Infrastructure.Data.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +13,7 @@ namespace Labb02_BookStore.Presentation.Command
     {
         private readonly Action<object?> execute;
         private readonly Func<object?, bool> canExecute;
+        private Action<object, BookStore> deleteBookFromStore;
 
         public event EventHandler? CanExecuteChanged;
 
@@ -21,6 +24,15 @@ namespace Labb02_BookStore.Presentation.Command
             ArgumentNullException.ThrowIfNull(execute);
             this.execute = execute;
             this.canExecute = canExecute;
+        }
+
+        public DelegateCommand(Action<object, BookStore, BookStoreDbContext> deleteBookFromStore)
+        {
+        }
+
+        public DelegateCommand(Action<object, BookStore> deleteBookFromStore)
+        {
+            this.deleteBookFromStore = deleteBookFromStore;
         }
 
         public bool CanExecute(object? parameter) => canExecute is null ? true : canExecute(parameter);

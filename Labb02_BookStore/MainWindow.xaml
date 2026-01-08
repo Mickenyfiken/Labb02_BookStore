@@ -9,7 +9,10 @@
         xmlns:views="clr-namespace:Labb02_BookStore.Views"
         mc:Ignorable="d"
         WindowState="Maximized"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        Icon="Icons/bookshelf_icon.ico">
+        
+
 
     <Window.Resources>
         <Style TargetType="{x:Type TextBlock}" x:Key="RightJustifiedTextCell">
@@ -116,11 +119,11 @@
                 <Run Text="Current Inventory:" />
                 <Run Text="{Binding ElementName=Stores, Path=SelectedItem.Name}" Foreground="#0077b6" />
             </TextBlock>
-
-
-
-
-            <DataGrid x:Name="myDataGrid"
+            
+            <DataGrid 
+              x:Name="myDataGrid"
+              ItemsSource="{Binding Books}"
+              SelectedItem="{Binding SelectedBook, Mode=TwoWay}"
               Grid.Row="1"
               AutoGenerateColumns="False"
               IsReadOnly="False"

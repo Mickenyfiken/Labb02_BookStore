@@ -13,6 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Icons\bookshelf_icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Page Remove="Window1.xaml" />
   </ItemGroup>
 
@@ -25,6 +29,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Labb02_BookStore.Infrastructure\Labb02_BookStore.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Icons\bookshelf_icon.ico" />
   </ItemGroup>
 
 </Project>

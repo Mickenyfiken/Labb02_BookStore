@@ -45,13 +45,24 @@ namespace Labb02_BookStore
 
         private void Stores_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            if (e.NewValue is BookStore store)
+            if (e.NewValue is BookStore store &&
+                DataContext is MainWindowViewModel vm)
             {
+                vm.LoadInventoryForStore(store);
                 using var db = new BookStoreDbContext();
-                LoadInventory(store, db);
                 LoadStoreDetails(store, db);
             }
         }
+
+        //private void Stores_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        //{
+        //    if (e.NewValue is BookStore store)
+        //    {
+        //        using var db = new BookStoreDbContext();
+        //        LoadInventory(store, db);
+        //        LoadStoreDetails(store, db);
+        //    }
+        //}
 
         private void LoadStoreDetails(BookStore store, BookStoreDbContext db)
         {
@@ -71,16 +82,16 @@ namespace Labb02_BookStore
             storeDetailGrid.ItemsSource = collection;
         }
 
-        private void LoadInventory(BookStore store, BookStoreDbContext db)
-        {
-            var inventories = db.Inventories
-             .Where(i => i.StoreId == store.Id)
-             .Include(i => i.Isbn13Navigation) 
-             .ToList();
+        //private void LoadInventory(BookStore store, BookStoreDbContext db)
+        //{
+        //    var inventories = db.Inventories
+        //     .Where(i => i.StoreId == store.Id)
+        //     .Include(i => i.Isbn13Navigation) 
+        //     .ToList();
 
-            myDataGrid.ItemsSource =
-                   new ObservableCollection<Inventory>(inventories);
-        }
+        //    myDataGrid.ItemsSource =
+        //           new ObservableCollection<Inventory>(inventories);
+        //}
 
         private void LoadBookStores()
         {
