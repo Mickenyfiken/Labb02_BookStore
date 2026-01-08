@@ -19,8 +19,15 @@ namespace Labb02_BookStore.Presentation.ViewModels
 
         public ICommand OpenAddStoreDialogCommand { get; }
         public ICommand DeleteStoreCommand { get; }
-
-        public ObservableCollection<BookStore> BookStores { get; private set; }
+        private ObservableCollection<BookStore> _bookStores;
+        public ObservableCollection<BookStore> BookStores
+        {
+            get => _bookStores; 
+            set
+            {
+                _bookStores = value;
+            }
+        }
 
         public MainWindowViewModel()
         {
@@ -30,7 +37,7 @@ namespace Labb02_BookStore.Presentation.ViewModels
 
         }
 
-        private void OpenAddStoreDialog(object? obj)
+        private async void OpenAddStoreDialog(object? obj)
         {
             var dialog = new AddStoreDialog();
 
@@ -49,8 +56,8 @@ namespace Labb02_BookStore.Presentation.ViewModels
                     Country = vm.Country
                 };
 
-                db.BookStores.AddAsync(store);
-                db.SaveChangesAsync();
+                await db.BookStores.AddAsync(store);
+                await db.SaveChangesAsync();
                 BookStores.Add(store);
             }
 
@@ -59,12 +66,7 @@ namespace Labb02_BookStore.Presentation.ViewModels
         private void LoadBookStores()
         {
             using var db = new BookStoreDbContext();
-
-            BookStores = new ObservableCollection<BookStore>
-                (
-                    db.BookStores.ToList()
-                );
-
+            BookStores = new ObservableCollection<BookStore>(db.BookStores.ToList());
         }
 
     }

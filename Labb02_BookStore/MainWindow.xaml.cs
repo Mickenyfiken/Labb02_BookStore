@@ -40,7 +40,7 @@ namespace Labb02_BookStore
             
             selectBookComboBox.ItemsSource = booksCollection;
 
-            LoadBookStores();
+            //LoadBookStores();
 
 
 

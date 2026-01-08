@@ -56,9 +56,9 @@
         </StackPanel>
 
 
-        <TreeView x:Name="Stores" SelectedItemChanged="Stores_SelectedItemChanged" Grid.Row="1">
+        <TreeView x:Name="Stores" ItemsSource="{Binding BookStores}" SelectedItemChanged="Stores_SelectedItemChanged" Grid.Row="1">
             <TreeView.Resources>
-                <HierarchicalDataTemplate DataType="{x:Type model:BookStore}" ItemsSource="{Binding BookStores}">
+                <HierarchicalDataTemplate DataType="{x:Type model:BookStore}" >
                     <TextBlock>
                         <Run Text="{Binding Name}" />
                     </TextBlock>
