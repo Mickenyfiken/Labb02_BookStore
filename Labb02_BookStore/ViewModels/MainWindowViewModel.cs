@@ -70,8 +70,7 @@ namespace Labb02_BookStore.Presentation.ViewModels
                     db.SaveChanges();
                     
                     Books.Remove(selectedBook);
-                    var grid = Application.Current.MainWindow.FindName("myDataGrid");
-                   
+                    
                     MessageBox.Show("Book deleted successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                     catch (Exception ex)
