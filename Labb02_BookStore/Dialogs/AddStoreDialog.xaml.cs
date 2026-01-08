@@ -20,13 +20,13 @@ namespace Labb02_BookStore.Presentation.Dialogs
     /// </summary>
     public partial class AddStoreDialog : Window
     {
-        public AddStoreViewModel AddStore { get; }
+        public StoreSetupViewModel AddStore { get; }
 
         public AddStoreDialog()
         {
             InitializeComponent();
 
-            AddStore = new AddStoreViewModel(this);
+            AddStore = new StoreSetupViewModel(this);
             DataContext = AddStore;
 
         }

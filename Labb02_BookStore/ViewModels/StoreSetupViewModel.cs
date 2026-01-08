@@ -9,7 +9,7 @@ using Labb02_BookStore.Presentation.Command;
 
 namespace Labb02_BookStore.Presentation.ViewModels
 {
-    public class AddStoreViewModel
+    public class StoreSetupViewModel
     {
         public string StoreName { get; set; }
         public string Street { get; set; }
@@ -19,7 +19,7 @@ namespace Labb02_BookStore.Presentation.ViewModels
         public ICommand AddCommand { get; }
         public ICommand CancelCommand { get; }
 
-        public AddStoreViewModel(Window window)
+        public StoreSetupViewModel(Window window)
         {
             AddCommand = new DelegateCommand(d =>
             {
