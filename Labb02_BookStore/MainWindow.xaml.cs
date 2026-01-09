@@ -40,18 +40,9 @@ namespace Labb02_BookStore
             
             selectBookComboBox.ItemsSource = booksCollection;
 
-            //LoadBookStores();
-
-
-
-            //Loaded += MainWindow_Loaded;
 
         }
 
-        //private void MainWindow_Loaded(object sender, RoutedEventArgs e)
-        //{
-        //    //LoadBookStores();
-        //}
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -112,16 +103,6 @@ namespace Labb02_BookStore
                     .ThenInclude(b => b.Categories)
                 .AsNoTracking()
                 .ToList();
-
-            //var storeIsbns = db.Inventories
-            //     .Where(i => i.StoreId == store.Id)
-            //     .Select(i => i.Isbn13)
-            //     .ToList();
-
-            //var booksInInventory = db.Books
-            //    .Where(b => storeIsbns.Contains(b.Isbn13))
-            //    .Include(b => b.Authors)
-            //    .ToList();
 
             var collection = new ObservableCollection<object>(inventory);
 

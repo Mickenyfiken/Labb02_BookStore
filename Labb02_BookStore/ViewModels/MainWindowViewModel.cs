@@ -52,7 +52,20 @@ namespace Labb02_BookStore.Presentation.ViewModels
             LoadBookStores();
             OpenAddStoreDialogCommand = new DelegateCommand(OpenAddStoreDialog);
             OpenEditStoreDialogCommand = new DelegateCommand(OpenEditStoreDialog);
+            DeleteStoreCommand = new DelegateCommand(DeleteStore);
 
+        }
+
+        private void DeleteStore(object? obj)
+        {
+            using var db = new BookStoreDbContext();
+
+            db.Remove(SelectedStore);
+            db.SaveChangesAsync();
+
+            var tempStore = SelectedStore;
+            LoadBookStores();
+            SelectedStore = BookStores.FirstOrDefault(s => s.Id == tempStore.Id);
         }
 
         private async void OpenEditStoreDialog(object? obj)

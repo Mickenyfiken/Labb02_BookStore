@@ -25,10 +25,6 @@ namespace Labb02_BookStore.Presentation.Dialogs
         {
             InitializeComponent();
 
-
-
-            //EditStore = new StoreSetupViewModel(this);
-            //DataContext = EditStore;
         }
     }
 }

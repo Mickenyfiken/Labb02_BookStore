@@ -50,7 +50,15 @@
                 Command="{Binding OpenEditStoreDialogCommand}"
                 >
             </Button>
-
+            <Button 
+                Grid.Row="0"
+                Margin="5"
+                Content="Delete Store" 
+                Width="65"
+                Height="20"
+                Command="{Binding DeleteStoreCommand}"
+                >
+            </Button>
 
 
         </StackPanel>
