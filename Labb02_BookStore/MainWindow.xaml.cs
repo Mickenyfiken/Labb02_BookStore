@@ -69,7 +69,11 @@ namespace Labb02_BookStore
                 using var db = new BookStoreDbContext();
                 LoadInventory(store, db);
                 storeDetailGrid.ItemsSource = new ObservableCollection<BookStore> { store };
-
+                
+            }
+            if (DataContext is MainWindowViewModel vm)
+            {
+                vm.SelectedStore = e.NewValue as BookStore;
             }
         }
 
