@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Labb02_BookStore.Presentation.ViewModels
 {
-    internal class ViewModelBase : INotifyPropertyChanged
+    public class ViewModelBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 

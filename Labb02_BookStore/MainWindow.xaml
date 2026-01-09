@@ -44,10 +44,10 @@
             <Button 
                 Grid.Row="0"
                 Margin="5"
-                Content="Delete Store" 
+                Content="Edit Store" 
                 Width="65"
                 Height="20"
-                Click="Button_Click"
+                Command="{Binding OpenEditStoreDialogCommand}"
                 >
             </Button>
 
@@ -56,7 +56,9 @@
         </StackPanel>
 
 
-        <TreeView x:Name="Stores" ItemsSource="{Binding BookStores}" SelectedItemChanged="Stores_SelectedItemChanged" Grid.Row="1">
+        <TreeView x:Name="Stores" ItemsSource="{Binding BookStores}"
+                  SelectedItemChanged="Stores_SelectedItemChanged" 
+                  Grid.Row="1">
             <TreeView.Resources>
                 <HierarchicalDataTemplate DataType="{x:Type model:BookStore}" >
                     <TextBlock>
@@ -115,7 +117,7 @@
                   RowHeaderWidth="20"
             >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Store Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Store Name" Binding="{Binding Name, Mode=TwoWay}"/>
                 <DataGridTextColumn Header="Store Adress" Binding="{Binding Street}"/>
                 <DataGridTextColumn Header="Store Zipcode" Binding="{Binding Zipcode}" ElementStyle="{StaticResource RightJustifiedTextCell}"/>
                 <DataGridTextColumn Header="Store City" Binding="{Binding City}"/>

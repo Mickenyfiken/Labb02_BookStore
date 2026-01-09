@@ -12,29 +12,77 @@ using Labb02_BookStore.Presentation.Dialogs;
 
 namespace Labb02_BookStore.Presentation.ViewModels
 {
-    class MainWindowViewModel : ViewModelBase
+    public class MainWindowViewModel : ViewModelBase
     {
 
 
 
         public ICommand OpenAddStoreDialogCommand { get; }
+        public ICommand OpenEditStoreDialogCommand { get; }
         public ICommand DeleteStoreCommand { get; }
+        private BookStore? _selectedStore;
+        public BookStore? SelectedStore
+        {
+            get => _selectedStore;
+            set
+            {
+                if (_selectedStore != value)
+                {
+                    _selectedStore = value;
+                    RaisePropertyChanged();
+
+                }
+            }
+        }
         private ObservableCollection<BookStore> _bookStores;
+
         public ObservableCollection<BookStore> BookStores
         {
             get => _bookStores; 
             set
             {
                 _bookStores = value;
+                RaisePropertyChanged();
             }
         }
+
 
         public MainWindowViewModel()
         {
             LoadBookStores();
-
             OpenAddStoreDialogCommand = new DelegateCommand(OpenAddStoreDialog);
+            OpenEditStoreDialogCommand = new DelegateCommand(OpenEditStoreDialog);
 
+        }
+
+        private async void OpenEditStoreDialog(object? obj)
+        {
+
+            var dialog = new EditStoreDialog();
+            
+            dialog.DataContext = new StoreSetupViewModel(dialog, SelectedStore);
+
+
+            if (dialog.ShowDialog() == true)
+            {
+                using var db = new BookStoreDbContext();
+                
+                var store = await db.BookStores.FindAsync(SelectedStore.Id);
+
+                store.Name = SelectedStore.Name;
+                store.Street = SelectedStore.Street;
+                store.Zipcode = SelectedStore.Zipcode;
+                store.City = SelectedStore.City;
+                store.Country = SelectedStore.Country;
+
+
+                await db.SaveChangesAsync();
+
+                var tempStore = SelectedStore;
+                LoadBookStores();
+                SelectedStore = BookStores.FirstOrDefault(s => s.Id == tempStore.Id);
+
+            }
         }
 
         private async void OpenAddStoreDialog(object? obj)
@@ -43,7 +91,7 @@ namespace Labb02_BookStore.Presentation.ViewModels
 
             if (dialog.ShowDialog() == true)
             {
-                var db = new BookStoreDbContext();
+                using var db = new BookStoreDbContext();
 
                 var vm = dialog.AddStore;
 
