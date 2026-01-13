@@ -9,23 +9,14 @@
     <Menu>
         <MenuItem Header="_File">
             <MenuItem Header="Select Store"/>
-            <!--<MenuItem Header="Packs" ItemsSource="{Binding Packs}" >
-                <MenuItem.ItemContainerStyle>
-                    <Style TargetType="MenuItem">
-                        <Setter Property="Header" Value="{Binding Name}"/>
-                        <Setter Property="Command" Value="{Binding DataContext.ConfigurationViewModel.SetSelecetedQuestionPackAsActiveCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
-                        <Setter Property="CommandParameter" Value="{Binding}"/>
-                    </Style>
-                </MenuItem.ItemContainerStyle>
-            </MenuItem>-->
             <Separator />
             <MenuItem Header="E_xit" InputGestureText="Alt+F4" Click="Exit_Program"  />
         </MenuItem>
 
         <MenuItem Header="_Store">
-            <MenuItem Header="Edit Store"/>
-            <MenuItem Header="Add Store"/>
-            <MenuItem Header="Remove Store"/>
+            <MenuItem Header="Edit Store" Command="{Binding OpenEditStoreDialogCommand}"/>
+            <MenuItem Header="Add Store" Command="{Binding OpenAddStoreDialogCommand}"/>
+            <MenuItem Header="Remove Store" Command="{Binding DeleteStoreCommand}"/>
         </MenuItem>
 
 
