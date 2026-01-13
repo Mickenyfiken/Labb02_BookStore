@@ -107,19 +107,29 @@ namespace Labb02_BookStore.Presentation.ViewModels
                 .ThenInclude(i => i.Isbn13Navigation)
                 .FirstOrDefault(b => b.Id == SelectedStore.Id);
 
+            var existing = bookstore.Inventories.FirstOrDefault(inv => inv.Isbn13 == book.Isbn13);
+            if (existing != null)
+            {
+                //existing.Balance += 1; // increment quantity
+                MessageBox.Show("Book already in Store, update quantity");
+                return;
+            }
+
             bookstore.Inventories.Add(new Inventory()
             {
                 StoreId = bookstore.Id,
                 Isbn13 = selectedBookToAdd.Isbn13,
                 Balance = +1
             });
-            db.SaveChanges();
+
+           db.SaveChanges();
             Books = new ObservableCollection<Inventory>(
                 db.Inventories
                 .Where(i => i.StoreId == SelectedStore.Id)
                 .Include(i => i.Isbn13Navigation)
                 .ToList());
 
+            LoadInventoryForStore(bookstore);
         }
 
         private async void DeleteStore(object? obj)

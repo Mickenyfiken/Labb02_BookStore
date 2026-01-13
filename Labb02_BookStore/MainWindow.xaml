@@ -172,7 +172,7 @@
               SelectedItem="{Binding SelectedBook, Mode=TwoWay}"
               Grid.Row="1"
               AutoGenerateColumns="False"
-              IsReadOnly="False"
+              IsReadOnly="True"
               CanUserAddRows="False"
               CanUserDeleteRows="False"
               CanUserResizeColumns="False"
