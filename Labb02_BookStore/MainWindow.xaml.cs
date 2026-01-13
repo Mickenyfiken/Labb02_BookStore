@@ -31,8 +31,8 @@ namespace Labb02_BookStore
             var books = db.Books.Where(b => b.Title == b.Title).ToList();
 
             var booksCollection = new ObservableCollection<Book>(books);
+            selectBookComboBox.ItemsSource = booksCollection;
 
-            
         }
 
         private void Stores_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)

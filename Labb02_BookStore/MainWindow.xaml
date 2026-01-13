@@ -11,7 +11,7 @@
         WindowState="Maximized"
         Title="MainWindow" Height="450" Width="800"
         Icon="Icons/bookshelf_icon.ico">
-        
+
 
 
     <Window.Resources>
@@ -20,7 +20,7 @@
             <Setter Property="TextAlignment" Value="Right"/>
         </Style>
     </Window.Resources>
-    
+
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -32,7 +32,7 @@
             <RowDefinition Height="*"/>
 
         </Grid.RowDefinitions>
-       
+
         <views:MenuView Grid.Row="0" Grid.ColumnSpan="2"/>
 
         <StackPanel Grid.Column="0" Grid.Row="1" VerticalAlignment="Top" Orientation="Vertical">
@@ -94,7 +94,7 @@
                                                           VerticalAlignment="Center"/>
                                         <ItemsPresenter Grid.Column="1"
                                                         Margin="18,0,0,0"/>
-                                     </Grid>     
+                                    </Grid>
                                     <ControlTemplate.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
                                             <Setter TargetName="Bd"
@@ -104,8 +104,8 @@
                                         <Trigger Property="IsSelected" Value="True">
                                             <Setter TargetName="Bd"
                                                     Property="Background"
-                                                    Value="#FFCCE5FF"/>     
-                                        </Trigger>  
+                                                    Value="#FFCCE5FF"/>
+                                        </Trigger>
                                         <Trigger Property="IsEnabled" Value="False">
                                             <Setter Property="Opacity" Value="0.5"/>
                                         </Trigger>
@@ -115,7 +115,7 @@
                             </Setter.Value>
                         </Setter>
                     </Style>
-                   <HierarchicalDataTemplate DataType="{x:Type model:BookStore}">
+                    <HierarchicalDataTemplate DataType="{x:Type model:BookStore}" ItemsSource="{Binding BookStores}">
                         <TextBlock FontSize="16" Padding="6">
                             <Run Text="{Binding Name}" />
                         </TextBlock>
@@ -126,7 +126,7 @@
             <DataGrid x:Name="storeDetailGrid"
                   Grid.Column="0"
                   Grid.Row="2"
-                  AutoGenerateColumns="False"  
+                  AutoGenerateColumns="True"  
                   IsReadOnly="False"
                   CanUserAddRows="False"
                   CanUserDeleteRows="False"
@@ -139,7 +139,7 @@
                   RowHeaderWidth="20"
             >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Store Name" Binding="{Binding Name, Mode=TwoWay}"/>
+                    <DataGridTextColumn Header="Store Name" Binding="{Binding Name}"/>
                     <DataGridTextColumn Header="Store Adress" Binding="{Binding Street}"/>
                     <DataGridTextColumn Header="Store Zipcode" Binding="{Binding Zipcode}" ElementStyle="{StaticResource RightJustifiedTextCell}"/>
                     <DataGridTextColumn Header="Store City" Binding="{Binding City}"/>
@@ -165,7 +165,7 @@
                 <Run Text="Current Inventory:" />
                 <Run Text="{Binding ElementName=Stores, Path=SelectedItem.Name}" Foreground="#0077b6" />
             </TextBlock>
-            
+
             <DataGrid 
               x:Name="myDataGrid"
               ItemsSource="{Binding Books}"
@@ -209,15 +209,15 @@
                                     Padding="8,2"
                                     Command="{Binding DataContext.DeleteBookFromStoreCommand,
                                                       RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                    CommandParameter="{Binding}" /> 
+                                    CommandParameter="{Binding}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
-        
-        <StackPanel>
-             <ComboBox 
+
+            <StackPanel>
+                <ComboBox 
              x:Name="selectBookComboBox"
              Grid.Column="1"
              Width="200"
@@ -230,5 +230,12 @@
              SelectedItem="{Binding selectedBookToAdd, Mode=TwoWay}" 
              />
 
+
+
+
+                <Button Content="Add Book" Width="auto" Command="{Binding AddBookToSelectedStoreCommand}"></Button>
+            </StackPanel>
+
+        </Grid>
     </Grid>
 </Window>

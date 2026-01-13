@@ -1,18 +1,19 @@
 ﻿using Labb02_BookStore.Domain;
 using Labb02_BookStore.Infrastructure.Data.Model;
 using Labb02_BookStore.Presentation.Command;
+using Labb02_BookStore.Presentation.Command;
+using Labb02_BookStore.Presentation.Dialogs;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Labb02_BookStore.Presentation.Command;
-using Labb02_BookStore.Presentation.Dialogs;
 
 namespace Labb02_BookStore.Presentation.ViewModels
 {
@@ -23,6 +24,8 @@ namespace Labb02_BookStore.Presentation.ViewModels
         public ICommand OpenAddStoreDialogCommand { get; }
         public ICommand OpenEditStoreDialogCommand { get; }
         public ICommand DeleteStoreCommand { get; }
+
+        public ICommand AddBookToSelectedStoreCommand { get; }
 
         private BookStore? _selectedStore;
         public BookStore? SelectedStore
@@ -61,6 +64,18 @@ namespace Labb02_BookStore.Presentation.ViewModels
                 RaisePropertyChanged();
             }
         }
+
+
+        private Book _selectedBookToAdd;
+        public Book selectedBookToAdd
+        {
+            get => _selectedBookToAdd;
+            set
+            {
+                _selectedBookToAdd = value;
+                RaisePropertyChanged();
+            }
+        }
         public ObservableCollection<Inventory> Books { get; private set; }
 
         //public ObservableCollection<string?> BookStores { get; private set; }
@@ -73,6 +88,38 @@ namespace Labb02_BookStore.Presentation.ViewModels
             DeleteStoreCommand = new DelegateCommand(DeleteStore);
             OpenBookEditWindowCommand = new DelegateCommand(OpenBookEditWindow);
             DeleteBookFromStoreCommand = new DelegateCommand(DeleteBookFromStore);
+            AddBookToSelectedStoreCommand = new DelegateCommand(AddBookToSelectedStore);
+        }
+
+
+
+        private void AddBookToSelectedStore(object parameter)
+        {
+            using var db = new BookStoreDbContext();
+
+            var book = selectedBookToAdd;
+
+            //var book = db.Books
+            //    .Where(b => b.Isbn13 == SelectedBook.Isbn13);
+
+            var bookstore = db.BookStores
+                .Include(b => b.Inventories)
+                .ThenInclude(i => i.Isbn13Navigation)
+                .FirstOrDefault(b => b.Id == SelectedStore.Id);
+
+            bookstore.Inventories.Add(new Inventory()
+            {
+                StoreId = bookstore.Id,
+                Isbn13 = selectedBookToAdd.Isbn13,
+                Balance = +1
+            });
+            db.SaveChanges();
+            Books = new ObservableCollection<Inventory>(
+                db.Inventories
+                .Where(i => i.StoreId == SelectedStore.Id)
+                .Include(i => i.Isbn13Navigation)
+                .ToList());
+
         }
 
         private async void DeleteStore(object? obj)
@@ -87,7 +134,6 @@ namespace Labb02_BookStore.Presentation.ViewModels
             LoadBookStores();
             SelectedStore = BookStores.FirstOrDefault(s => s.Id == tempStore.Id);
         }
-
 
         private async void OpenEditStoreDialog(object? obj)
         {
@@ -146,9 +192,9 @@ namespace Labb02_BookStore.Presentation.ViewModels
         }
 
         private void DeleteBookFromStore(object parameter)
-       {
+        {
             var selectedBook = parameter as Inventory;
-            
+
             if (selectedBook == null)
             {
                 MessageBox.Show("No book selected.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -171,12 +217,12 @@ namespace Labb02_BookStore.Presentation.ViewModels
                     db.Attach(selectedBook);
                     db.Inventories.Remove(selectedBook);
                     db.SaveChanges();
-                    
+
                     Books.Remove(selectedBook);
-                    
+
                     MessageBox.Show("Book deleted successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
-                    catch (Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show($"Error deleting book: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
