@@ -32,13 +32,42 @@
             <RowDefinition Height="*"/>
 
         </Grid.RowDefinitions>
-
+       
         <views:MenuView Grid.Row="0" Grid.ColumnSpan="2"/>
 
         <StackPanel Grid.Column="0" Grid.Row="1" VerticalAlignment="Top" Orientation="Vertical">
             <TextBlock Text="Book Stores" FontSize="20" Padding="6" FontWeight="Bold"></TextBlock>
-            
-            <TreeView x:Name="Stores" SelectedItemChanged="Stores_SelectedItemChanged">
+
+            <Button 
+                Grid.Row="0"
+                Margin="5"
+                Content="Add Store" 
+                Width="65"
+                Height="20"
+                Command="{Binding OpenAddStoreDialogCommand}"
+                >
+            </Button>
+            <Button 
+                Grid.Row="0"
+                Margin="5"
+                Content="Edit Store" 
+                Width="65"
+                Height="20"
+                Command="{Binding OpenEditStoreDialogCommand}"
+                >
+            </Button>
+            <Button 
+                Grid.Row="0"
+                Margin="5"
+                Content="Delete Store" 
+                Width="65"
+                Height="20"
+                Command="{Binding DeleteStoreCommand}"
+                >
+            </Button>
+
+
+            <TreeView x:Name="Stores" SelectedItemChanged="Stores_SelectedItemChanged" ItemsSource="{Binding BookStores}">
                 <TreeView.Resources>
 
                     <Style TargetType="TreeViewItem">
@@ -93,15 +122,32 @@
                     </HierarchicalDataTemplate>
                 </TreeView.Resources>
             </TreeView>
-            
-            <DataGrid x:Name="storeDetailGrid" AutoGenerateColumns="False">
+
+            <DataGrid x:Name="storeDetailGrid"
+                  Grid.Column="0"
+                  Grid.Row="2"
+                  AutoGenerateColumns="True"  
+                  IsReadOnly="False"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  CanUserResizeColumns="False"
+                  CanUserResizeRows="False"
+                  CanUserReorderColumns="False"
+                  CanUserSortColumns="True"
+                  SelectionMode="Extended"
+                  SelectionUnit="CellOrRowHeader"
+                  RowHeaderWidth="20"
+            >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Store Details" Binding="{Binding Name}" />
-                    <DataGridTextColumn Header="Store Details" Binding="{Binding Adress}" />
-                    <DataGridTextColumn Header="Store Details" Binding="{Binding Zipcode}" ElementStyle="{StaticResource RightJustifiedTextCell}" />
-                    <DataGridTextColumn Header="Store Details" Binding="{Binding City}" />
-                    <DataGridTextColumn Header="Store Details" Binding="{Binding Country}" />
+                    <DataGridTextColumn Header="Store Name" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="Store Adress" Binding="{Binding Street}"/>
+                    <DataGridTextColumn Header="Store Zipcode" Binding="{Binding Zipcode}" ElementStyle="{StaticResource RightJustifiedTextCell}"/>
+                    <DataGridTextColumn Header="Store City" Binding="{Binding City}"/>
+                    <DataGridTextColumn Header="Store Country" Binding="{Binding Country}"/>
                 </DataGrid.Columns>
+
+
+
             </DataGrid>
         </StackPanel>
 

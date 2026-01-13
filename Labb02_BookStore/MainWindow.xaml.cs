@@ -30,12 +30,20 @@ namespace Labb02_BookStore
         {
             InitializeComponent();
             DataContext = new MainWindowViewModel();
+            LoadBookStores();
+            using var db = new BookStoreDbContext();
+
+            var books = db.Books.Where(b => b.Title == b.Title).ToList();
+
+            var booksCollection = new ObservableCollection<Book>(books);
+
             
+
             //using var db = new BookStoreDbContext();
 
             //var books = db.Books.ToList();
 
-            LoadBookStores();
+
             //Loaded += MainWindow_Loaded;
         }
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -43,13 +51,15 @@ namespace Labb02_BookStore
             //LoadBookStores();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            myDataGrid.Visibility =
-                myDataGrid.Visibility == Visibility.Visible
-                ? Visibility.Collapsed
-                : Visibility.Visible;
-        }
+        //private void Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    myDataGrid.Visibility =
+        //        myDataGrid.Visibility == Visibility.Visible
+        //        ? Visibility.Collapsed
+        //        : Visibility.Visible;
+        //}
+
+
 
         private void Stores_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
@@ -57,9 +67,12 @@ namespace Labb02_BookStore
                 DataContext is MainWindowViewModel vm)
             {
                 vm.LoadInventoryForStore(store);
+                vm.SelectedStore = e.NewValue as BookStore;
                 using var db = new BookStoreDbContext();
                 LoadStoreDetails(store, db);
+                storeDetailGrid.ItemsSource = new ObservableCollection<BookStore> { store };
             }
+            
         }
 
         //private void Stores_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)

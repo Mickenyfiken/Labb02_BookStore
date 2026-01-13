@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Labb02_BookStore.Presentation.Command;
+using Labb02_BookStore.Presentation.Dialogs;
 
 namespace Labb02_BookStore.Presentation.ViewModels
 {
@@ -18,6 +20,35 @@ namespace Labb02_BookStore.Presentation.ViewModels
     {
         public ICommand OpenBookEditWindowCommand { get; }
         public ICommand DeleteBookFromStoreCommand { get; }
+        public ICommand OpenAddStoreDialogCommand { get; }
+        public ICommand OpenEditStoreDialogCommand { get; }
+        public ICommand DeleteStoreCommand { get; }
+
+        private BookStore? _selectedStore;
+        public BookStore? SelectedStore
+        {
+            get => _selectedStore;
+            set
+            {
+                if (_selectedStore != value)
+                {
+                    _selectedStore = value;
+                    RaisePropertyChanged();
+
+                }
+            }
+        }
+        private ObservableCollection<BookStore> _bookStores;
+
+        public ObservableCollection<BookStore> BookStores
+        {
+            get => _bookStores;
+            set
+            {
+                _bookStores = value;
+                RaisePropertyChanged();
+            }
+        }
 
         private readonly BookStoreDbContext _context;
         private Inventory _selectedBook;
@@ -32,17 +63,88 @@ namespace Labb02_BookStore.Presentation.ViewModels
         }
         public ObservableCollection<Inventory> Books { get; private set; }
 
-        public ObservableCollection<string?> BookStores { get; private set; }
+        //public ObservableCollection<string?> BookStores { get; private set; }
 
         public MainWindowViewModel()
         {
             LoadBookStores();
-           
+            OpenAddStoreDialogCommand = new DelegateCommand(OpenAddStoreDialog);
+            OpenEditStoreDialogCommand = new DelegateCommand(OpenEditStoreDialog);
+            DeleteStoreCommand = new DelegateCommand(DeleteStore);
             OpenBookEditWindowCommand = new DelegateCommand(OpenBookEditWindow);
             DeleteBookFromStoreCommand = new DelegateCommand(DeleteBookFromStore);
         }
 
-       private void DeleteBookFromStore(object parameter)
+        private async void DeleteStore(object? obj)
+        {
+            using var db = new BookStoreDbContext();
+
+            db.Remove(SelectedStore);
+            await db.SaveChangesAsync();
+
+            var tempStore = SelectedStore;
+
+            LoadBookStores();
+            SelectedStore = BookStores.FirstOrDefault(s => s.Id == tempStore.Id);
+        }
+
+        private async void OpenEditStoreDialog(object? obj)
+        {
+
+            var dialog = new EditStoreDialog();
+
+            dialog.DataContext = new StoreSetupViewModel(dialog, SelectedStore);
+
+
+            if (dialog.ShowDialog() == true)
+            {
+                using var db = new BookStoreDbContext();
+
+                var store = await db.BookStores.FindAsync(SelectedStore.Id);
+
+                store.Name = SelectedStore.Name;
+                store.Street = SelectedStore.Street;
+                store.Zipcode = SelectedStore.Zipcode;
+                store.City = SelectedStore.City;
+                store.Country = SelectedStore.Country;
+
+
+                await db.SaveChangesAsync();
+
+                var tempStore = SelectedStore;
+                LoadBookStores();
+                SelectedStore = BookStores.FirstOrDefault(s => s.Id == tempStore.Id);
+
+            }
+        }
+
+        private async void OpenAddStoreDialog(object? obj)
+        {
+            var dialog = new AddStoreDialog();
+
+            if (dialog.ShowDialog() == true)
+            {
+                using var db = new BookStoreDbContext();
+
+                var vm = dialog.AddStore;
+
+                var store = new BookStore
+                {
+                    Name = vm.StoreName,
+                    Street = vm.Street,
+                    Zipcode = vm.ZipCode,
+                    City = vm.City,
+                    Country = vm.Country
+                };
+
+                await db.BookStores.AddAsync(store);
+                await db.SaveChangesAsync();
+                BookStores.Add(store);
+            }
+
+        }
+
+        private void DeleteBookFromStore(object parameter)
        {
             var selectedBook = parameter as Inventory;
             
@@ -116,14 +218,17 @@ namespace Labb02_BookStore.Presentation.ViewModels
 
         private void LoadBookStores()
         {
+            //using var db = new BookStoreDbContext();
+
+            //Books = new ObservableCollection<Inventory>(db.Inventories.ToList());
+
+            //BookStores = new ObservableCollection<string>
+            //    (
+            //        db.BookStores.Select(bs => bs.Name).ToList()
+            //    );
+
             using var db = new BookStoreDbContext();
-
-            Books = new ObservableCollection<Inventory>(db.Inventories.ToList());
-
-            BookStores = new ObservableCollection<string?>
-                (
-                    db.BookStores.Select(bs => bs.Name).ToList()
-                );
+            BookStores = new ObservableCollection<BookStore>(db.BookStores.ToList());
 
         }
 
