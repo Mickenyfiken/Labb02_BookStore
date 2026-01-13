@@ -43,6 +43,14 @@ namespace Labb02_BookStore
             //LoadBookStores();
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            myDataGrid.Visibility =
+                myDataGrid.Visibility == Visibility.Visible
+                ? Visibility.Collapsed
+                : Visibility.Visible;
+        }
+
         private void Stores_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             if (e.NewValue is BookStore store &&
