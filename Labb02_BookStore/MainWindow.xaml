@@ -115,7 +115,7 @@
                             </Setter.Value>
                         </Setter>
                     </Style>
-                   <HierarchicalDataTemplate DataType="{x:Type model:BookStore}" ItemsSource="{Binding BookStores}">
+                   <HierarchicalDataTemplate DataType="{x:Type model:BookStore}">
                         <TextBlock FontSize="16" Padding="6">
                             <Run Text="{Binding Name}" />
                         </TextBlock>
@@ -126,7 +126,7 @@
             <DataGrid x:Name="storeDetailGrid"
                   Grid.Column="0"
                   Grid.Row="2"
-                  AutoGenerateColumns="True"  
+                  AutoGenerateColumns="False"  
                   IsReadOnly="False"
                   CanUserAddRows="False"
                   CanUserDeleteRows="False"
@@ -139,7 +139,7 @@
                   RowHeaderWidth="20"
             >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Store Name" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="Store Name" Binding="{Binding Name, Mode=TwoWay}"/>
                     <DataGridTextColumn Header="Store Adress" Binding="{Binding Street}"/>
                     <DataGridTextColumn Header="Store Zipcode" Binding="{Binding Zipcode}" ElementStyle="{StaticResource RightJustifiedTextCell}"/>
                     <DataGridTextColumn Header="Store City" Binding="{Binding City}"/>

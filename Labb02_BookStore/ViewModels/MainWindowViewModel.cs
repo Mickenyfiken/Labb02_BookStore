@@ -88,6 +88,7 @@ namespace Labb02_BookStore.Presentation.ViewModels
             SelectedStore = BookStores.FirstOrDefault(s => s.Id == tempStore.Id);
         }
 
+
         private async void OpenEditStoreDialog(object? obj)
         {
 

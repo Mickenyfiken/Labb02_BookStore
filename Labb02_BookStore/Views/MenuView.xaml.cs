@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Labb02_BookStore.Presentation.ViewModels;
 
 namespace Labb02_BookStore.Views
 {
@@ -23,6 +24,7 @@ namespace Labb02_BookStore.Views
         public MenuView()
         {
             InitializeComponent();
+            DataContext = new MainWindowViewModel();
         }
 
         private void Exit_Program(object sender, RoutedEventArgs e)
