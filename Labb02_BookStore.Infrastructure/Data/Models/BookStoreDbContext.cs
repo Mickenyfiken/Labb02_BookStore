@@ -42,12 +42,12 @@ public partial class BookStoreDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        var config = new ConfigurationBuilder().AddUserSecrets<BookStoreDbContext>().Build();
-        var connectionString = config["ConnectionString"];
+        //var config = new ConfigurationBuilder().AddUserSecrets<BookStoreDbContext>().Build();
+        //var connectionString = config["ConnectionString"];
 
-        optionsBuilder.UseSqlServer(connectionString);
+        //optionsBuilder.UseSqlServer(connectionString);
 
-        //optionsBuilder.UseSqlServer("Data Source=localhost;Database=BookStoreDB;Integrated Security=True;TrustServerCertificate=True;");
+        optionsBuilder.UseSqlServer("Data Source=localhost;Database=BookStoreDB;Integrated Security=True;TrustServerCertificate=True;");
 
     }
 
