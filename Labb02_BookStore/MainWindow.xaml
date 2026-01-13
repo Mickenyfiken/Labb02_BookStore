@@ -215,7 +215,20 @@
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
-        </Grid>
+        
+        <StackPanel>
+             <ComboBox 
+             x:Name="selectBookComboBox"
+             Grid.Column="1"
+             Width="200"
+             Margin="10"
+             IsEditable="True"
+             IsReadOnly="True"
+             Text="Select a book..."
+             VerticalAlignment="Center"
+             DisplayMemberPath="Title"
+             SelectedItem="{Binding selectedBookToAdd, Mode=TwoWay}" 
+             />
 
     </Grid>
 </Window>
