@@ -56,12 +56,12 @@ namespace Labb02_BookStore.Presentation.ViewModels
 
         }
 
-        private void DeleteStore(object? obj)
+        private async void DeleteStore(object? obj)
         {
             using var db = new BookStoreDbContext();
 
             db.Remove(SelectedStore);
-            db.SaveChangesAsync();
+            await db.SaveChangesAsync();
 
             var tempStore = SelectedStore;
             LoadBookStores();
