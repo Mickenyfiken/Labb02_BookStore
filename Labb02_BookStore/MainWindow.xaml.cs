@@ -39,6 +39,8 @@ namespace Labb02_BookStore
 
             
 
+            selectBookComboBox.ItemsSource = booksCollection;
+
             //using var db = new BookStoreDbContext();
 
             //var books = db.Books.ToList();
@@ -103,15 +105,15 @@ namespace Labb02_BookStore
             storeDetailGrid.ItemsSource = collection;
         }
 
-        //private void LoadInventory(BookStore store, BookStoreDbContext db)
+        //private void loadinventory(bookstore store, bookstoredbcontext db)
         //{
-        //    var inventories = db.Inventories
-        //     .Where(i => i.StoreId == store.Id)
-        //     .Include(i => i.Isbn13Navigation) 
-        //     .ToList();
+        //    var inventories = db.inventories
+        //     .where(i => i.storeid == store.id)
+        //     .include(i => i.isbn13navigation)
+        //     .tolist();
 
-        //    myDataGrid.ItemsSource =
-        //           new ObservableCollection<Inventory>(inventories);
+        //    mydatagrid.itemssource =
+        //           new observablecollection<inventory>(inventories);
         //}
 
         private void LoadBookStores()
