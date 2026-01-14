@@ -8,25 +8,10 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Menu>
         <MenuItem Header="_File">
-            <MenuItem Header="Select Store"/>
-            <Separator />
             <MenuItem Header="E_xit" InputGestureText="Alt+F4" Click="Exit_Program"  />
         </MenuItem>
-
-        <MenuItem Header="_Store">
-            <MenuItem Header="Edit Store" Command="{Binding OpenEditStoreDialogCommand}"/>
-            <MenuItem Header="Add Store" Command="{Binding OpenAddStoreDialogCommand}"/>
-            <MenuItem Header="Remove Store" Command="{Binding DeleteStoreCommand}"/>
+        <MenuItem Header="_View">
+            <MenuItem Header="F_ullscreen" InputGestureText="Alt+Enter" Click="FullScreen_Program"  />
         </MenuItem>
-
-
-        <MenuItem Header="_Books">
-            <MenuItem Header="Edit Book"/>
-            <MenuItem Header="Remove Book"/>
-            <MenuItem Header="Add Book"/>
-        </MenuItem>
-        
     </Menu>
-    
-    
-</UserControl>
+ </UserControl>

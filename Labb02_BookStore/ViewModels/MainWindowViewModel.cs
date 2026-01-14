@@ -99,9 +99,6 @@ namespace Labb02_BookStore.Presentation.ViewModels
 
             var book = selectedBookToAdd;
 
-            //var book = db.Books
-            //    .Where(b => b.Isbn13 == SelectedBook.Isbn13);
-
             var bookstore = db.BookStores
                 .Include(b => b.Inventories)
                 .ThenInclude(i => i.Isbn13Navigation)
@@ -117,17 +114,14 @@ namespace Labb02_BookStore.Presentation.ViewModels
 
             bookstore.Inventories.Add(new Inventory()
             {
-                StoreId = bookstore.Id,
-                Isbn13 = selectedBookToAdd.Isbn13,
-                Balance = +1
+                    Isbn13 = selectedBookToAdd.Isbn13,
+                    Balance = 1
             });
+                db.SaveChanges();
 
-           db.SaveChanges();
-            Books = new ObservableCollection<Inventory>(
-                db.Inventories
-                .Where(i => i.StoreId == SelectedStore.Id)
-                .Include(i => i.Isbn13Navigation)
-                .ToList());
+                LoadInventoryForStore(bookstore);
+
+
 
             LoadInventoryForStore(bookstore);
         }
@@ -135,6 +129,16 @@ namespace Labb02_BookStore.Presentation.ViewModels
         private async void DeleteStore(object? obj)
         {
             using var db = new BookStoreDbContext();
+
+            var bookstore = db.BookStores
+                .Include(b => b.Inventories)
+                .FirstOrDefault(b => b.Id == SelectedStore.Id);
+
+            if (bookstore.Inventories.Count > 0)
+            {
+                MessageBox.Show("Store must be empty");
+                return;
+            }
 
             db.Remove(SelectedStore);
             await db.SaveChangesAsync();

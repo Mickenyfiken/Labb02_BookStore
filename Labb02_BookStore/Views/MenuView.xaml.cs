@@ -31,5 +31,24 @@ namespace Labb02_BookStore.Views
         {
             Application.Current.Shutdown();
         }
+
+        private void FullScreen_Program(object sender, RoutedEventArgs e)
+        {
+            if (Application.Current.MainWindow != null)
+            {
+                var window = Application.Current.MainWindow;
+
+                if (window.WindowState == WindowState.Maximized && window.WindowStyle == WindowStyle.None)
+                {
+                    window.WindowStyle = WindowStyle.SingleBorderWindow;
+                    window.WindowState = WindowState.Normal;
+                }
+                else
+                {
+                    window.WindowStyle = WindowStyle.None;
+                    window.WindowState = WindowState.Maximized;
+                }
+            }
+        }
     }
 }
