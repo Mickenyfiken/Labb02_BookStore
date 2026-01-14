@@ -99,32 +99,45 @@ namespace Labb02_BookStore.Presentation.ViewModels
 
             var book = selectedBookToAdd;
 
-            //var book = db.Books
-            //    .Where(b => b.Isbn13 == SelectedBook.Isbn13);
-
             var bookstore = db.BookStores
                 .Include(b => b.Inventories)
                 .ThenInclude(i => i.Isbn13Navigation)
                 .FirstOrDefault(b => b.Id == SelectedStore.Id);
 
+            var existing = bookstore.Inventories.FirstOrDefault(inv => inv.Isbn13 == book.Isbn13);
+            if (existing != null)
+            {
+                //existing.Balance += 1; // increment quantity
+                MessageBox.Show("Book already in Store, update quantity");
+                return;
+            }
+
             bookstore.Inventories.Add(new Inventory()
             {
-                StoreId = bookstore.Id,
-                Isbn13 = selectedBookToAdd.Isbn13,
-                Balance = +1
+                    Isbn13 = selectedBookToAdd.Isbn13,
+                    Balance = 1
             });
-            db.SaveChanges();
-            Books = new ObservableCollection<Inventory>(
-                db.Inventories
-                .Where(i => i.StoreId == SelectedStore.Id)
-                .Include(i => i.Isbn13Navigation)
-                .ToList());
+                db.SaveChanges();
+
+                LoadInventoryForStore(bookstore);
+
+
 
         }
 
         private async void DeleteStore(object? obj)
         {
             using var db = new BookStoreDbContext();
+
+            var bookstore = db.BookStores
+                .Include(b => b.Inventories)
+                .FirstOrDefault(b => b.Id == SelectedStore.Id);
+
+            if (bookstore.Inventories.Count > 0)
+            {
+                MessageBox.Show("Store must be empty");
+                return;
+            }
 
             db.Remove(SelectedStore);
             await db.SaveChangesAsync();

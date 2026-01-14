@@ -14,7 +14,7 @@ public partial class Book
 
     public decimal? Price { get; set; }
 
-    public DateOnly? DateOfIssue { get; set; }
+    public DateTime? DateOfIssue { get; set; }
 
     public int? PublisherId { get; set; }
 

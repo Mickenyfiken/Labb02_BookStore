@@ -37,35 +37,55 @@
 
         <StackPanel Grid.Column="0" Grid.Row="1" VerticalAlignment="Top" Orientation="Vertical">
             <TextBlock Text="Book Stores" FontSize="20" Padding="6" FontWeight="Bold"></TextBlock>
+            <StackPanel Grid.Row="1" Orientation="Horizontal">
 
-            <Button 
-                Grid.Row="0"
-                Margin="5"
-                Content="Add Store" 
-                Width="65"
-                Height="20"
-                Command="{Binding OpenAddStoreDialogCommand}"
-                >
-            </Button>
-            <Button 
-                Grid.Row="0"
-                Margin="5"
-                Content="Edit Store" 
-                Width="65"
-                Height="20"
-                Command="{Binding OpenEditStoreDialogCommand}"
-                >
-            </Button>
-            <Button 
-                Grid.Row="0"
-                Margin="5"
-                Content="Delete Store" 
-                Width="65"
-                Height="20"
-                Command="{Binding DeleteStoreCommand}"
-                >
-            </Button>
 
+                <Button 
+                    Content="Add Store"
+                    Width="Auto"
+                    Margin="5"
+                    Padding="5 0"
+                    Background="CornflowerBlue"
+                    Foreground="White"
+                    FontSize="14"
+                    FontWeight="SemiBold"
+                    BorderThickness="0"
+                    Cursor="Hand" 
+                    Command="{Binding OpenAddStoreDialogCommand}"       
+                        />
+                
+ 
+                <Button 
+                    Content="Edit Store" 
+                    Width="Auto"
+                    Margin="5"
+                    Padding="5 0"
+                    Background="CornflowerBlue"
+                    Foreground="White"
+                    FontSize="14"
+                    FontWeight="SemiBold"
+                    BorderThickness="0"
+                    Cursor="Hand" 
+                    Command="{Binding OpenEditStoreDialogCommand}"
+                    >
+                </Button>
+                <Button 
+
+                    Content="Delete Store" 
+                    Width="Auto"
+                    Margin="5"
+                    Padding="5 0"
+                    Background="Crimson"
+                    Foreground="White"
+                    FontSize="14"
+                    FontWeight="SemiBold"
+                    BorderThickness="0"
+                    Cursor="Hand" 
+                    Command="{Binding DeleteStoreCommand}"
+                    >
+                </Button>
+
+            </StackPanel>
 
             <TreeView x:Name="Stores" SelectedItemChanged="Stores_SelectedItemChanged" ItemsSource="{Binding BookStores}">
                 <TreeView.Resources>
@@ -122,7 +142,6 @@
                     </HierarchicalDataTemplate>
                 </TreeView.Resources>
             </TreeView>
-
             <DataGrid x:Name="storeDetailGrid"
                   Grid.Column="0"
                   Grid.Row="2"
