@@ -32,6 +32,11 @@ namespace Labb02_BookStore
 
             var booksCollection = new ObservableCollection<Book>(books);
             selectBookComboBox.ItemsSource = booksCollection;
+            
+            var authors = db.Authors.Where(a => a.Firstname == a.Firstname).ToList();
+            
+            var authorsList = new ObservableCollection<Author>(authors);
+            selectAuthorComboBox.ItemsSource = authorsList;
 
         }
 

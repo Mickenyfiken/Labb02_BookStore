@@ -122,6 +122,7 @@ namespace Labb02_BookStore.Presentation.ViewModels
         }
         private async void DeleteStore(object? obj)
         {
+            addAuthor();
             if (SelectedStore == null)
             {
                 MessageBox.Show("Need to select a store");
@@ -142,6 +143,29 @@ namespace Labb02_BookStore.Presentation.ViewModels
 
             LoadBookStores();
             SelectedStore = BookStores.FirstOrDefault(s => s.Id == tempStore.Id);
+        }
+
+        private void addAuthor()
+        {
+            using var db = new BookStoreDbContext();
+            var authers = db.Authors;
+
+            var newAuthor = new Author
+            {
+                //Id = 11,
+                Firstname = "Bengt",
+                Lastname = "JOhnsson",
+                DateOfBirth = new DateOnly(2001, 1, 3),
+                DateOfDeath = new DateOnly(2024, 1, 3)
+            };
+
+           
+            authers.Add(newAuthor);
+            db.SaveChanges();
+
+            //.Include(b => b.Inventories)
+            //.ThenInclude(i => i.Isbn13Navigation)
+            //.FirstOrDefault(b => b.Id == SelectedStore.Id);
         }
 
         private bool IsStoreEmpty()

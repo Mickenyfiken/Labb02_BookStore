@@ -300,6 +300,14 @@
 
                    
                 </StackPanel>
+                <ComboBox x:Name="selectAuthorComboBox"
+                       Width="200"
+                       Height="20"
+                       IsEditable="True"
+                       IsReadOnly="True"
+                       Text="Select an Author..."
+                       DisplayMemberPath="FullName"
+                       /> 
 
             </Grid>
 
