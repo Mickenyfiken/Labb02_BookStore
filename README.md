@@ -27,7 +27,7 @@ Clone the repository - git@github.com:Mickenyfiken/Labb02_BookStore.git
 start Labb02_BookStore.
 
 Able to choose the store you want to edit.
-<img width="897" height="552" alt="image" src="https://github.com/user-attachments/assets/2c7a5a0c-03c1-4246-91c8-c691fce653fb" />
+![Screenshot](Sceenshots/Main.png)
 
 After selecting a store, you are able to see and edit the books in the inventory.
 <img width="1023" height="592" alt="image" src="https://github.com/user-attachments/assets/2799ec75-a0e0-406a-a2f2-0dbad4a67eff" />
