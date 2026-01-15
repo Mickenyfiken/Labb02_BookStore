@@ -5,10 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Labb02_BookStore.Presentation" xmlns:viewmodels="clr-namespace:Labb02_BookStore.Presentation.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
         mc:Ignorable="d"
-        Title="BookEditWindow" Height="450" Width="800">
-
+        Title="BookEditWindow"
+        Height="450" 
+        Width="800"
+        Background="#F7CB8B"
+        >
     
-
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -18,45 +20,46 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-    </Grid.RowDefinitions>
+        </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="120"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-       
 
-        <TextBlock Text="ISBN:" Grid.Row="0" Grid.Column="0" />
-        <TextBox IsReadOnly="True" Text="{Binding SelectedBook.Isbn13, Mode=TwoWay}" Grid.Row="0" Grid.Column="1"/>
 
-        <TextBlock Text="Title:" Grid.Row="1" Grid.Column="0" />
-        <TextBox Text="{Binding SelectedBook.Isbn13Navigation.Title, Mode=TwoWay}" Grid.Row="1" Grid.Column="1"/>
+        <TextBlock Text="ISBN:" Grid.Row="0" Grid.Column="0" Margin="0 0 0 10" FontWeight="Bold"/>
+        <TextBox IsReadOnly="True" Text="{Binding SelectedBook.Isbn13, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" Margin="0 0 0 10" />
 
-        <TextBlock Text="Price:" Grid.Row="2" Grid.Column="0" />
-        <TextBox Text="{Binding SelectedBook.Isbn13Navigation.Price, Mode=TwoWay}" Grid.Row="2" Grid.Column="1"/>
+        <TextBlock Text="Title:" Grid.Row="1" Grid.Column="0" Margin="0 0 0 10" FontWeight="Bold"/>
+        <TextBox Text="{Binding SelectedBook.Isbn13Navigation.Title, Mode=TwoWay}" Grid.Row="1" Grid.Column="1" Margin="0 0 0 10"/>
 
-        <TextBlock Text="Balance:" Grid.Row="3" Grid.Column="0" />
-        <TextBox Text="{Binding SelectedBook.Balance, Mode=TwoWay}" Grid.Row="3" Grid.Column="1"/>
+        <TextBlock Text="Price:" Grid.Row="2" Grid.Column="0" Margin="0 0 0 10"  FontWeight="Bold"/>
+        <TextBox Text="{Binding SelectedBook.Isbn13Navigation.Price, Mode=TwoWay}" Grid.Row="2" Grid.Column="1" Margin="0 0 0 10"/>
 
-        <TextBlock Text="DateOfIssue:" Grid.Row="4" Grid.Column="0" />
+        <TextBlock Text="Balance:" Grid.Row="3" Grid.Column="0" Margin="0 0 0 10" FontWeight="Bold"/>
+        <TextBox Text="{Binding SelectedBook.Balance, Mode=TwoWay}" Grid.Row="3" Grid.Column="1" Margin="0 0 0 10"/>
+
+        <TextBlock Text="DateOfIssue:" Grid.Row="4" Grid.Column="0" Margin="0 0 0 10" FontWeight="Bold"/>
         <DatePicker SelectedDateFormat="Long" SelectedDate="{Binding SelectedBook.Isbn13Navigation.DateOfIssue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   DisplayDateStart="1/01/09" DisplayDateEnd="12/31/09" 
                   FirstDayOfWeek="Monday"
-                  Grid.Row="4" Grid.Column="1"/>
-        <!--<TextBox Text="{Binding SelectedBook.Isbn13Navigation.DateOfIssue, Mode=TwoWay}" Grid.Row="4" Grid.Column="1"/>-->
-
-
-        <TextBlock Text="Language:" Grid.Row="5" Grid.Column="0" />
+                  Grid.Row="4" Grid.Column="1" Margin="0 0 0 10"/>
+        <TextBlock Text="Language:" Grid.Row="5" Grid.Column="0" FontWeight="Bold"/>
         <TextBox Text="{Binding SelectedBook.Isbn13Navigation.Language, Mode=TwoWay}" Grid.Row="5" Grid.Column="1"/>
 
-        
         <Button Content="Save Book"
                 Grid.Row="6"
                 Grid.Column="1"
                 HorizontalAlignment="Right"
                 Width="120"
-                Margin="0,10,0,0"
+                Margin="0 10 5 10"
+                Padding="16"
+                Background="#3F95D4"
+                Foreground="White"
+                FontSize="14"
+                FontWeight="SemiBold"
+                Cursor="Hand"
                 Command="{Binding SaveBookCommand}" />
-        </Grid>
-
+    </Grid>
 </Window>

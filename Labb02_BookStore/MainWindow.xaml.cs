@@ -35,6 +35,16 @@ namespace Labb02_BookStore
 
         }
 
+        private void Show_SelectedStore_Iventory_and_Details(object sender, MouseButtonEventArgs e)
+        {
+            SelectedStoreIventoryDataGrid.Visibility = Visibility.Visible;
+            AvailibleBookList.Visibility = Visibility.Visible;
+            SelectedStoreName.Visibility = Visibility.Visible;
+            storeDetailSource.Visibility = Visibility.Visible;
+            StoreDetailsHeader.Visibility = Visibility.Visible;
+        }
+
+
         private void Stores_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             if (e.NewValue is BookStore store &&
@@ -44,7 +54,7 @@ namespace Labb02_BookStore
                 vm.SelectedStore = e.NewValue as BookStore;
                 using var db = new BookStoreDbContext();
                 LoadStoreDetails(store, db);
-                storeDetailGrid.ItemsSource = new ObservableCollection<BookStore> { store };
+                storeDetailSource.ItemsSource = new ObservableCollection<BookStore> { store };
             }
 
         }
@@ -65,7 +75,7 @@ namespace Labb02_BookStore
                 .ToList();
 
             var collection = new ObservableCollection<object>(storeDetail);
-            storeDetailGrid.ItemsSource = collection;
+            storeDetailSource.ItemsSource = collection;
         }
 
         //private void loadinventory(bookstore store, bookstoredbcontext db)

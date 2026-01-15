@@ -9,19 +9,29 @@
         xmlns:views="clr-namespace:Labb02_BookStore.Views"
         mc:Ignorable="d"
         WindowState="Maximized"
-        Title="MainWindow" Height="450" Width="800"
+        Title="MainWindow"
+        Height="450"
+        Width="800"
+        Background="#F7CB8B"
         Icon="Icons/bookshelf_icon.ico">
 
-
-
+  
     <Window.Resources>
         <Style TargetType="{x:Type TextBlock}" x:Key="RightJustifiedTextCell">
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
             <Setter Property="TextAlignment" Value="Right"/>
         </Style>
+        <Style x:Key="TextColumnElementStyle" TargetType="TextBlock">
+            <Setter Property="Padding" Value="10,4"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="TextColumnEditingStyle" TargetType="TextBox">
+            <Setter Property="Padding" Value="10,4"/>
+        </Style>
     </Window.Resources>
 
-
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
@@ -30,226 +40,277 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-
         </Grid.RowDefinitions>
 
+     
         <views:MenuView Grid.Row="0" Grid.ColumnSpan="2"/>
 
-        <StackPanel Grid.Column="0" Grid.Row="1" VerticalAlignment="Top" Orientation="Vertical">
-            <TextBlock Text="Book Stores" FontSize="20" Padding="6" FontWeight="Bold"></TextBlock>
-            <StackPanel Grid.Row="1" Orientation="Horizontal">
+      
+        <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
 
+            <StackPanel Grid.Column="0" VerticalAlignment="Top">
 
-                <Button 
-                    Content="Add Store"
-                    Width="Auto"
-                    Margin="5"
-                    Padding="5 0"
-                    Background="CornflowerBlue"
-                    Foreground="White"
-                    FontSize="14"
-                    FontWeight="SemiBold"
-                    BorderThickness="0"
-                    Cursor="Hand" 
-                    Command="{Binding OpenAddStoreDialogCommand}"       
-                        />
-                
- 
-                <Button 
-                    Content="Edit Store" 
-                    Width="Auto"
-                    Margin="5"
-                    Padding="5 0"
-                    Background="CornflowerBlue"
-                    Foreground="White"
-                    FontSize="14"
-                    FontWeight="SemiBold"
-                    BorderThickness="0"
-                    Cursor="Hand" 
-                    Command="{Binding OpenEditStoreDialogCommand}"
-                    >
-                </Button>
-                <Button 
+                <TextBlock Text="Book Stores"
+                           FontSize="30"
+                           FontWeight="Bold"
+                           Foreground="White"
+                           />
 
-                    Content="Delete Store" 
-                    Width="Auto"
-                    Margin="5"
-                    Padding="5 0"
-                    Background="Crimson"
-                    Foreground="White"
-                    FontSize="14"
-                    FontWeight="SemiBold"
-                    BorderThickness="0"
-                    Cursor="Hand" 
-                    Command="{Binding DeleteStoreCommand}"
-                    >
-                </Button>
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Add Store"
+                            Margin="0 10 5 10"
+                            Padding="16"
+                            Background="#3F95D4"
+                            Foreground="White"
+                            FontSize="14"
+                            FontWeight="SemiBold"
+                            Cursor="Hand"
+                            Command="{Binding OpenAddStoreDialogCommand}"/>
 
-            </StackPanel>
+                    <Button Content="Edit Store"
+                            Margin="0 10 5 10"
+                            Padding="16"
+                            Background="#349886"
+                            Foreground="White"
+                            FontSize="14"
+                            FontWeight="SemiBold"
+                            BorderThickness="0"
+                            Cursor="Hand"
+                            Command="{Binding OpenEditStoreDialogCommand}"/>
 
-            <TreeView x:Name="Stores" SelectedItemChanged="Stores_SelectedItemChanged" ItemsSource="{Binding BookStores}">
-                <TreeView.Resources>
+                    <Button Content="Delete Store"
+                            Margin="0 10 5 10"
+                            Padding="16"
+                            Background="#E2574C"
+                            Foreground="White"
+                            FontSize="14"
+                            FontWeight="SemiBold"
+                            BorderThickness="0"
+                            Cursor="Hand"
+                            Command="{Binding DeleteStoreCommand}"/>
+                </StackPanel>
 
-                    <Style TargetType="TreeViewItem">
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="BorderBrush" Value="Transparent"/>
-                        <Setter Property="Padding" Value="4"/>
+                <TreeView x:Name="Stores"
+                          ItemsSource="{Binding BookStores}"
+                          SelectedItemChanged="Stores_SelectedItemChanged">
 
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="TreeViewItem">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Border x:Name="Bd"
-                                                Grid.Column="1"
-                                                Background="{TemplateBinding Background}"
-                                                CornerRadius="2"/>
-                                        <ContentPresenter Grid.Column="1"
-                                                          ContentSource="Header"
-                                                          HorizontalAlignment="Stretch"
-                                                          VerticalAlignment="Center"/>
-                                        <ItemsPresenter Grid.Column="1"
-                                                        Margin="18,0,0,0"/>
-                                    </Grid>
-                                    <ControlTemplate.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter TargetName="Bd"
-                                                    Property="Background"
-                                                    Value="#FFE6F2FF"/>
-                                        </Trigger>
-                                        <Trigger Property="IsSelected" Value="True">
-                                            <Setter TargetName="Bd"
-                                                    Property="Background"
-                                                    Value="#FFCCE5FF"/>
-                                        </Trigger>
-                                        <Trigger Property="IsEnabled" Value="False">
-                                            <Setter Property="Opacity" Value="0.5"/>
-                                        </Trigger>
+                    <TreeView.Resources>
 
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                    <HierarchicalDataTemplate DataType="{x:Type model:BookStore}" ItemsSource="{Binding BookStores}">
-                        <TextBlock FontSize="16" Padding="6">
-                            <Run Text="{Binding Name}" />
-                        </TextBlock>
-                    </HierarchicalDataTemplate>
-                </TreeView.Resources>
-            </TreeView>
-            <DataGrid x:Name="storeDetailGrid"
-                  Grid.Column="0"
-                  Grid.Row="2"
-                  AutoGenerateColumns="True"  
-                  IsReadOnly="False"
-                  CanUserAddRows="False"
-                  CanUserDeleteRows="False"
-                  CanUserResizeColumns="False"
-                  CanUserResizeRows="False"
-                  CanUserReorderColumns="False"
-                  CanUserSortColumns="True"
-                  SelectionMode="Extended"
-                  SelectionUnit="CellOrRowHeader"
-                  RowHeaderWidth="20"
-            >
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Store Name" Binding="{Binding Name}"/>
-                    <DataGridTextColumn Header="Store Adress" Binding="{Binding Street}"/>
-                    <DataGridTextColumn Header="Store Zipcode" Binding="{Binding Zipcode}" ElementStyle="{StaticResource RightJustifiedTextCell}"/>
-                    <DataGridTextColumn Header="Store City" Binding="{Binding City}"/>
-                    <DataGridTextColumn Header="Store Country" Binding="{Binding Country}"/>
-                </DataGrid.Columns>
+                        <Style TargetType="TreeViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="BorderBrush" Value="Transparent"/>
+                            <Setter Property="Padding" Value="4"/>
 
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="TreeViewItem">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
 
+                                            <Border x:Name="Bd"
+                                                    Grid.Column="1"
+                                                    Background="{TemplateBinding Background}"
+                                                    CornerRadius="2"/>
 
-            </DataGrid>
-        </StackPanel>
+                                            <ContentPresenter Grid.Column="1"
+                                                              ContentSource="Header"
+                                                              VerticalAlignment="Center"/>
 
-        <Grid Grid.Column="1" Grid.Row="1" VerticalAlignment="Top">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+                                            <ItemsPresenter Grid.Column="1"
+                                                            Margin="18,0,0,0"/>
+                                        </Grid>
 
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="Bd"
+                                                        Property="Background"
+                                                        Value="#FFE6F2FF"/>
+                                            </Trigger>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter TargetName="Bd"
+                                                        Property="Background"
+                                                        Value="#FFCCE5FF"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
 
-            <TextBlock Grid.Row="0"
-                       FontSize="20"
+                        <HierarchicalDataTemplate DataType="{x:Type model:BookStore}"
+                                                 >
+                            <TextBlock FontSize="16" Padding="6" MouseLeftButtonUp="Show_SelectedStore_Iventory_and_Details">
+                                <Run Text="{Binding Name}" />
+                            </TextBlock>
+                        </HierarchicalDataTemplate>
+
+                    </TreeView.Resources>
+                </TreeView>
+
+                <Label 
+                       x:Name="StoreDetailsHeader"
+                       Visibility="Collapsed"
+                       Content="Store Details" 
+                       FontSize="30"
                        FontWeight="Bold"
-                       Padding="6">
-                <Run Text="Current Inventory:" />
-                <Run Text="{Binding ElementName=Stores, Path=SelectedItem.Name}" Foreground="#0077b6" />
-            </TextBlock>
+                       Foreground="White">
+                </Label>
 
-            <DataGrid 
-              x:Name="myDataGrid"
-              ItemsSource="{Binding Books}"
-              SelectedItem="{Binding SelectedBook, Mode=TwoWay}"
-              Grid.Row="1"
-              AutoGenerateColumns="False"
-              IsReadOnly="True"
-              CanUserAddRows="False"
-              CanUserDeleteRows="False"
-              CanUserResizeColumns="False"
-              CanUserResizeRows="False"
-              CanUserReorderColumns="False"
-              CanUserSortColumns="True"
-              SelectionMode="Extended"
-              SelectionUnit="CellOrRowHeader"
-              RowHeaderWidth="20"
-              HorizontalScrollBarVisibility="Hidden"
-              AlternationCount="2"
-              RowBackground="White"
-              AlternatingRowBackground="#FFCCE5FF">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="ISBN13" Binding="{Binding Isbn13}" />
-                    <DataGridTextColumn Header="Title" Binding="{Binding Isbn13Navigation.Title}" />
-                    <DataGridTextColumn Header="Price" Binding="{Binding Isbn13Navigation.Price}" />
-                    <DataGridTextColumn Header="Quantity" Binding="{Binding Balance}" />
-                    <DataGridTemplateColumn Header="Edit Book">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="Edit"
-                                Padding="8,2"
-                                Command="{Binding DataContext.OpenBookEditWindowCommand,
-                                                  RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                CommandParameter="{Binding}" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="Edit Book">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="Delete"
-                                    Padding="8,2"
-                                    Command="{Binding DataContext.DeleteBookFromStoreCommand,
-                                                      RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                    CommandParameter="{Binding}" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
 
-            <StackPanel>
-                <ComboBox 
-                 x:Name="selectBookComboBox"
-                 Grid.Column="1"
-                 Width="200"
-                 Margin="10"
-                 IsEditable="True"
-                 IsReadOnly="True"
-                 Text="Select a book..."
-                 VerticalAlignment="Center"
-                 DisplayMemberPath="Title"
-                 SelectedItem="{Binding selectedBookToAdd, Mode=TwoWay}" 
-             />
-                <Button Content="Add Book" Width="auto" Command="{Binding AddBookToSelectedStoreCommand}"></Button>
+                <ListBox x:Name="storeDetailSource" Grid.Row="1" Focusable="False" ItemsSource="{Binding SelectedStore}" IsHitTestVisible="False" Visibility="Collapsed">
+                    
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical" Focusable="False">
+                                <TextBlock Text="Store Name" FontWeight="Bold"/>
+                                <TextBox Text="{Binding Name}" IsReadOnly="True" Padding="3" Margin="0 6 0 6"/>
+                                <TextBlock Text="Street" FontWeight="Bold"/>
+                                <TextBox Text="{Binding Street}" IsReadOnly="True" Padding="3" Margin="0 6 0 6"/>
+                                <TextBlock Text="Zipcode" FontWeight="Bold"/>
+                                <TextBox Text="{Binding Zipcode}" IsReadOnly="True" Padding="3" Margin="0 6 0 6"/>
+                                <TextBlock Text="City" FontWeight="Bold"/>
+                                <TextBox Text="{Binding City}" IsReadOnly="True" Padding="3" Margin="0 6 0 6"/>
+                                <TextBlock Text="Country" FontWeight="Bold"/>
+                                <TextBox Text="{Binding Country}" IsReadOnly="True" Padding="3" Margin="0 6 0 6"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </StackPanel>
+
+
+            <Grid Grid.Column="1" VerticalAlignment="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0"
+                   FontSize="30"
+                   FontWeight="Bold"
+                   Foreground="White" 
+                   Margin="40 0 0 0" 
+                   x:Name="SelectedStoreName"
+                   Visibility="Collapsed">
+                    <Run Text="Current Inventory: "/>
+                    <Run Text="{Binding ElementName=Stores, Path=SelectedItem.Name}"
+                 Foreground="#0077b6"/>
+                </TextBlock>
+
+
+                <DataGrid 
+                  x:Name="SelectedStoreIventoryDataGrid"
+                  Grid.Row="1"
+                  ItemsSource="{Binding Books}"
+                  SelectedItem="{Binding SelectedBook}"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  RowHeaderWidth="0"
+                  AlternationCount="2"
+                  Margin="40 72 0 0"
+                  AlternatingRowBackground="#FFCCE5FF"
+                  CanUserResizeColumns="False"
+                  HorizontalAlignment="Left"
+                  Visibility="Collapsed"
+                   >
+
+                    
+                    <DataGrid.ColumnHeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Padding" Value="12,6"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </DataGrid.ColumnHeaderStyle>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ISBN13" Binding="{Binding Isbn13}" ElementStyle="{StaticResource TextColumnElementStyle}"
+                                            EditingElementStyle="{StaticResource TextColumnEditingStyle}"/>
+                        <DataGridTextColumn Header="Title" Binding="{Binding Isbn13Navigation.Title}" ElementStyle="{StaticResource TextColumnElementStyle}"
+                                            EditingElementStyle="{StaticResource TextColumnEditingStyle}"/>
+                        <DataGridTextColumn Header="Price" Binding="{Binding Isbn13Navigation.Price}"
+                                            ElementStyle="{StaticResource TextColumnElementStyle}"
+                                            EditingElementStyle="{StaticResource TextColumnEditingStyle}"/>
+                        <DataGridTextColumn Header="Quantity" Binding="{Binding Balance}" ElementStyle="{StaticResource TextColumnElementStyle}"
+                                            EditingElementStyle="{StaticResource TextColumnEditingStyle}"/>
+
+                        <DataGridTemplateColumn Header="Edit Book">
+                            <DataGridTemplateColumn.CellTemplate >
+                                <DataTemplate >
+                                    <Button Content="Edit" 
+                                            Margin="3"
+                                            Padding="8"
+                                            Command="{Binding DataContext.OpenBookEditWindowCommand,
+                                                RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                            CommandParameter="{Binding}"
+                                            Background="#349886"
+                                            Foreground="White"
+                                            FontSize="14"
+                                            FontWeight="SemiBold"
+                                            BorderThickness="0"
+                                            Cursor="Hand"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Delete Book">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate >
+                                    <Button Content="Delete"
+                                            Margin="3"
+                                            Padding="8"
+                                            Command="{Binding DataContext.DeleteBookFromStoreCommand,
+                                                       RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                            CommandParameter="{Binding}"
+                                            Background="#E2574C"
+                                            Foreground="White"
+                                            FontSize="14"
+                                            FontWeight="SemiBold"
+                                            BorderThickness="0"
+                                            Cursor="Hand"/> 
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <StackPanel  
+                              x:Name="AvailibleBookList"
+                              Grid.Row="2"
+                              Orientation="Vertical"
+                              HorizontalAlignment="Left"
+                              Visibility="Collapsed"
+                              Margin="40 20 0 0">    
+                    
+                    <ComboBox x:Name="selectBookComboBox"
+                              Width="200"
+                              Height="20"
+                              IsEditable="True"
+                              IsReadOnly="True"
+                              Text="Select a book..."
+                              DisplayMemberPath="Title"
+                              SelectedItem="{Binding selectedBookToAdd}"/>  
+
+                    <Button Content="Add Book"
+                            Margin="0 20 0 0"
+                            Background="#3F95D4"
+                            Foreground="White"
+                            FontSize="14"
+                            FontWeight="SemiBold"
+                            Cursor="Hand"
+                            Command="{Binding AddBookToSelectedStoreCommand}"/>     
+
+                   
+                </StackPanel>
+
+            </Grid>
 
         </Grid>
     </Grid>
