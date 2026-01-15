@@ -43,8 +43,6 @@ namespace Labb02_BookStore
             storeDetailSource.Visibility = Visibility.Visible;
             StoreDetailsHeader.Visibility = Visibility.Visible;
         }
-
-
         private void Stores_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             if (e.NewValue is BookStore store &&
@@ -56,10 +54,7 @@ namespace Labb02_BookStore
                 LoadStoreDetails(store, db);
                 storeDetailSource.ItemsSource = new ObservableCollection<BookStore> { store };
             }
-
         }
-
-
         private void LoadStoreDetails(BookStore store, BookStoreDbContext db)
         {
                var storeDetail = db.BookStores
@@ -77,27 +72,5 @@ namespace Labb02_BookStore
             var collection = new ObservableCollection<object>(storeDetail);
             storeDetailSource.ItemsSource = collection;
         }
-
-        //private void loadinventory(bookstore store, bookstoredbcontext db)
-        //{
-        //    var inventories = db.inventories
-        //     .where(i => i.storeid == store.id)
-        //     .include(i => i.isbn13navigation)
-        //     .tolist();
-
-        //    mydatagrid.itemssource =
-        //           new observablecollection<inventory>(inventories);
-        //}
-
-        private void LoadBookStores()
-        {
-            using var db = new BookStoreDbContext();
-
-            var bookStores = db.BookStores
-                .Include(bs => bs.Inventories)
-                .ToList();
-
-            Stores.ItemsSource = new ObservableCollection<BookStore>(bookStores);
-        }
-     }
+    }
 }

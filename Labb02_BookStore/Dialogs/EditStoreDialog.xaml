@@ -9,6 +9,7 @@
         Height="450" 
         Width="800"
         Background="#F7CB8B">
+
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -26,20 +27,20 @@
         <Label Content="Store Name" Grid.Row="0" Grid.Column="0" Margin="0, 0, 1, 0" FontWeight="Bold"/>
         <TextBox Text="{Binding StoreName, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="1" Margin="0, 5"/>
 
-            <Label Content="Street" Grid.Row="1" Grid.Column="0" Margin="0, 0, 1, 0" FontWeight="Bold"/>
+        <Label Content="Street" Grid.Row="1" Grid.Column="0" Margin="0, 0, 1, 0" FontWeight="Bold"/>
         <TextBox Text="{Binding Street, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Margin="0, 5"/>
 
-                <Label Content="Zipcode" Grid.Row="2" Grid.Column="0" Margin="0, 0, 1, 0" FontWeight="Bold"/>
+        <Label Content="Zipcode" Grid.Row="2" Grid.Column="0" Margin="0, 0, 1, 0" FontWeight="Bold"/>
         <TextBox Text="{Binding ZipCode, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" Margin="0, 5"/>
-
 
         <Label Content="City" Grid.Row="3" Grid.Column="0" Margin="0, 0, 1, 0" FontWeight="Bold"/>
         <TextBox Text="{Binding City, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1" Margin="0, 5"/>
 
         <Label Content="Country" Grid.Row="4" Grid.Column="0" Margin="0, 0, 1, 0" FontWeight="Bold" />
         <TextBox Text="{Binding Country, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1" Margin="0, 5"/>
-        
+
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="5" Grid.ColumnSpan="2">
+            
             <Button  
                 HorizontalAlignment="Right"
                 Width="120"
@@ -65,21 +66,6 @@
                 Cursor="Hand"
                 Content="Cancel" 
                 Command="{Binding CancelCommand}"/>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         </StackPanel>
     </Grid>
 </Window>

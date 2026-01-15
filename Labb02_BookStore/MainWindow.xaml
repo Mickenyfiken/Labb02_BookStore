@@ -15,7 +15,6 @@
         Background="#F7CB8B"
         Icon="Icons/bookshelf_icon.ico">
 
-  
     <Window.Resources>
         <Style TargetType="{x:Type TextBlock}" x:Key="RightJustifiedTextCell">
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
@@ -30,7 +29,6 @@
             <Setter Property="Padding" Value="10,4"/>
         </Style>
     </Window.Resources>
-
     
     <Grid>
         <Grid.ColumnDefinitions>
@@ -41,11 +39,9 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-     
+        
         <views:MenuView Grid.Row="0" Grid.ColumnSpan="2"/>
 
-      
         <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*" />
@@ -164,9 +160,7 @@
                        Foreground="White">
                 </Label>
 
-
                 <ListBox x:Name="storeDetailSource" Grid.Row="1" Focusable="False" ItemsSource="{Binding SelectedStore}" IsHitTestVisible="False" Visibility="Collapsed">
-                    
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Vertical" Focusable="False">
@@ -185,8 +179,7 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
             </StackPanel>
-
-
+    
             <Grid Grid.Column="1" VerticalAlignment="Top">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -206,7 +199,6 @@
                  Foreground="#0077b6"/>
                 </TextBlock>
 
-
                 <DataGrid 
                   x:Name="SelectedStoreIventoryDataGrid"
                   Grid.Row="1"
@@ -223,8 +215,7 @@
                   Visibility="Collapsed"
                    >
 
-                    
-                    <DataGrid.ColumnHeaderStyle>
+                 <DataGrid.ColumnHeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="Padding" Value="12,6"/>
                             <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -282,12 +273,12 @@
                 </DataGrid>
 
                 <StackPanel  
-                              x:Name="AvailibleBookList"
-                              Grid.Row="2"
-                              Orientation="Vertical"
-                              HorizontalAlignment="Left"
-                              Visibility="Collapsed"
-                              Margin="40 20 0 0">    
+                           x:Name="AvailibleBookList"
+                           Grid.Row="2"
+                           Orientation="Vertical"
+                           HorizontalAlignment="Left"
+                           Visibility="Collapsed"
+                           Margin="40 20 0 0">    
                     
                     <ComboBox x:Name="selectBookComboBox"
                               Width="200"

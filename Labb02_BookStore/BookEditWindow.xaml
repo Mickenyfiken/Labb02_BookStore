@@ -10,7 +10,7 @@
         Width="800"
         Background="#F7CB8B"
         >
-    
+
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -26,7 +26,6 @@
             <ColumnDefinition Width="120"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-
 
         <TextBlock Text="ISBN:" Grid.Row="0" Grid.Column="0" Margin="0 0 0 10" FontWeight="Bold"/>
         <TextBox IsReadOnly="True" Text="{Binding SelectedBook.Isbn13, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" Margin="0 0 0 10" />

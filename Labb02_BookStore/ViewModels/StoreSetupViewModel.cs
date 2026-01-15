@@ -44,13 +44,18 @@ namespace Labb02_BookStore.Presentation.ViewModels
         {
             _editStore = store;
 
+            if(store == null)
+            {
+                MessageBox.Show("Selected a Store");
+                return;
+            }
             StoreName = store.Name;
             Street = store.Street;
             ZipCode = store.Zipcode;
             City = store.City;
             Country = store.Country;
-
         }
+
 
         private void CancelAddStore(object? obj)
         {

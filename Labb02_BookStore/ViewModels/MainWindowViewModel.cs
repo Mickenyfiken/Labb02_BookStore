@@ -1,7 +1,6 @@
 ﻿using Labb02_BookStore.Domain;
 using Labb02_BookStore.Infrastructure.Data.Model;
 using Labb02_BookStore.Presentation.Command;
-using Labb02_BookStore.Presentation.Command;
 using Labb02_BookStore.Presentation.Dialogs;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -77,9 +76,6 @@ namespace Labb02_BookStore.Presentation.ViewModels
             }
         }
         public ObservableCollection<Inventory> Books { get; private set; }
-
-        //public ObservableCollection<string?> BookStores { get; private set; }
-
         public MainWindowViewModel()
         {
             LoadBookStores();
@@ -89,16 +85,10 @@ namespace Labb02_BookStore.Presentation.ViewModels
             OpenBookEditWindowCommand = new DelegateCommand(OpenBookEditWindow);
             DeleteBookFromStoreCommand = new DelegateCommand(DeleteBookFromStore);
             AddBookToSelectedStoreCommand = new DelegateCommand(AddBookToSelectedStore);
-            //SelectedStore = BookStores[0];
         }
-
-
-
         private void AddBookToSelectedStore(object parameter)
         {
             using var db = new BookStoreDbContext();
-           
-
             var book = selectedBookToAdd;
 
             if (book == null)
@@ -114,11 +104,8 @@ namespace Labb02_BookStore.Presentation.ViewModels
 
             var existing = bookstore.Inventories.FirstOrDefault(inv => inv.Isbn13 == book.Isbn13);
             
-           
-            
             if (existing != null)
             {
-                //existing.Balance += 1; // increment quantity
                 MessageBox.Show("Book already in Store, update quantity");
                 return;
             }
@@ -131,16 +118,16 @@ namespace Labb02_BookStore.Presentation.ViewModels
                 db.SaveChanges();
 
                 LoadInventoryForStore(bookstore);
-
-
-
-            LoadInventoryForStore(bookstore);
+                LoadInventoryForStore(bookstore);
         }
-
         private async void DeleteStore(object? obj)
         {
+            if (SelectedStore == null)
+            {
+                MessageBox.Show("Need to select a store");
+                return;
+            }
             using var db = new BookStoreDbContext();
-
             var isempty = IsStoreEmpty();
 
             if (isempty == true)
@@ -160,6 +147,7 @@ namespace Labb02_BookStore.Presentation.ViewModels
         private bool IsStoreEmpty()
         {
             using var db = new BookStoreDbContext();
+
             var bookstore = db.BookStores
                 .Include(b => b.Inventories)
                 .FirstOrDefault(b => b.Id == SelectedStore.Id);
@@ -174,11 +162,14 @@ namespace Labb02_BookStore.Presentation.ViewModels
 
         private async void OpenEditStoreDialog(object? obj)
         {
-
+            if (SelectedStore == null)
+            {
+                MessageBox.Show("Need to select a store");
+                return;
+            }
             var dialog = new EditStoreDialog();
 
             dialog.DataContext = new StoreSetupViewModel(dialog, SelectedStore);
-
 
             if (dialog.ShowDialog() == true)
             {
@@ -192,13 +183,11 @@ namespace Labb02_BookStore.Presentation.ViewModels
                 store.City = SelectedStore.City;
                 store.Country = SelectedStore.Country;
 
-
                 await db.SaveChangesAsync();
 
                 var tempStore = SelectedStore;
                 LoadBookStores();
                 SelectedStore = BookStores.FirstOrDefault(s => s.Id == tempStore.Id);
-
             }
         }
 
@@ -225,7 +214,6 @@ namespace Labb02_BookStore.Presentation.ViewModels
                 await db.SaveChangesAsync();
                 BookStores.Add(store);
             }
-
         }
 
         private void DeleteBookFromStore(object parameter)
@@ -256,8 +244,6 @@ namespace Labb02_BookStore.Presentation.ViewModels
                     db.SaveChanges();
 
                     Books.Remove(selectedBook);
-
-                    //MessageBox.Show("Book deleted successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception ex)
                 {
@@ -265,7 +251,6 @@ namespace Labb02_BookStore.Presentation.ViewModels
                 }
             }
         }
-
         public void LoadInventoryForStore(BookStore store)
         {
             using var db = new BookStoreDbContext();
@@ -275,18 +260,15 @@ namespace Labb02_BookStore.Presentation.ViewModels
                   .Where(i => i.StoreId == store.Id)
                   .Include(i => i.Isbn13Navigation)
                   .ToList());
-
             RaisePropertyChanged(nameof(Books));
         }
-
         private void OpenBookEditWindow(object parameter)
         {
             var selectedBook = parameter as Inventory;
             if (selectedBook == null) return;
 
             var db = new BookStoreDbContext();
-
-
+        
             db.Attach(selectedBook);
 
             var vm = new BookEditViewModel(selectedBook, db);
@@ -295,26 +277,12 @@ namespace Labb02_BookStore.Presentation.ViewModels
             {
                 DataContext = vm
             };
-
             window.Show();
         }
-
-
         private void LoadBookStores()
         {
-            //using var db = new BookStoreDbContext();
-
-            //Books = new ObservableCollection<Inventory>(db.Inventories.ToList());
-
-            //BookStores = new ObservableCollection<string>
-            //    (
-            //        db.BookStores.Select(bs => bs.Name).ToList()
-            //    );
-
             using var db = new BookStoreDbContext();
             BookStores = new ObservableCollection<BookStore>(db.BookStores.ToList());
-
         }
-
-    }
+     }
 }
