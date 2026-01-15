@@ -33,10 +33,10 @@ After selecting a store, you are able to see and edit the books in the inventory
 ![Main](Screenshots/SelectedStore.png)
 
 If you want to edit (or add) a store you will get this to fill in or change the values.
-![Main](Sceenshots/EditStore.png)
+![Main](Screenshots/EditStore.png)
 
 Similar to edit store, you are able to edit the books.
-![Main](Sceenshots/EditBook.png)
+![Main](Screenshots/EditBook.png)
 
 
 
