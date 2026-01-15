@@ -30,13 +30,13 @@ Able to choose the store you want to edit.
 ![Screenshot](Sceenshots/Main.png)
 
 After selecting a store, you are able to see and edit the books in the inventory.
-<img width="1023" height="592" alt="image" src="https://github.com/user-attachments/assets/2799ec75-a0e0-406a-a2f2-0dbad4a67eff" />
+![Screenshot](Sceenshots/SelectedStore.png)
 
 If you want to edit (or add) a store you will get this to fill in or change the values.
-<img width="518" height="325" alt="image" src="https://github.com/user-attachments/assets/a3428c19-19f1-4852-8013-ffcd7411f4e6" />
+![Screenshot](Sceenshots/EditStore.png)
 
 Similar to edit store, you are able to edit the books.
-<img width="767" height="237" alt="image" src="https://github.com/user-attachments/assets/6818fd02-56dd-4ed7-966f-5714094af2f8" />
+![Screenshot](Sceenshots/EditBook.png)
 
 
 
