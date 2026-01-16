@@ -97,8 +97,7 @@
                     <TreeView.Resources>
 
                         <Style TargetType="TreeViewItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                            <Setter Property="Background" Value="Transparent"/>
+                           <Setter Property="Background" Value="Transparent"/>
                             <Setter Property="BorderBrush" Value="Transparent"/>
                             <Setter Property="Padding" Value="4"/>
 
