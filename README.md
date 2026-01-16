@@ -27,16 +27,16 @@ Clone the repository - git@github.com:Mickenyfiken/Labb02_BookStore.git
 start Labb02_BookStore.
 
 Able to choose the store you want to edit.
-![Screenshot](Sceenshots/Main.png)
+![Main](Screenshots/Main.png)
 
 After selecting a store, you are able to see and edit the books in the inventory.
-![Screenshot](Sceenshots/SelectedStore.png)
+![Main](Screenshots/SelectedStore.png)
 
 If you want to edit (or add) a store you will get this to fill in or change the values.
-![Screenshot](Sceenshots/EditStore.png)
+![Main](Screenshots/EditStore.png)
 
 Similar to edit store, you are able to edit the books.
-![Screenshot](Sceenshots/EditBook.png)
+![Main](Screenshots/EditBook.png)
 
 
 
